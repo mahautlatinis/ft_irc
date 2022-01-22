@@ -3,6 +3,11 @@
 - Status: validated
 - Grade: 125%
 
+## Suggestion for you
+- Use your proxy.py program with your server (or a real server) to check how messages look like.
+- Download Hexchat on your 42 VM or find another UX friendly client for your environment.
+- Check DCC send and DCC get for the FTP bonus.
+- Split the work into tree part : 1. The socket programming and network part, 2. Client registration/connection and associated commands + Sending messages and notices, 3. Channel operations commands.  
 
 → **Socket programming**
 
@@ -15,8 +20,6 @@ PASS pass
 NICK nickname
 USER nickname username 127.0.0.1 :realname
 ```
-
-→ Attention mon projet marche uniquement sous mac
 
 Page principale (voir celle de Baudoin), de jolis schemas avaient ete fait sur notre “command process”: 
 
