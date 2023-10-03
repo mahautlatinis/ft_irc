@@ -14,5 +14,5 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: compilation check
-      run: cd ft_irc; make -n; ./ircserv 6667;
+      run: cd ft_irc; make -n; ls; ./ircserv 6667;
       # exit 0
