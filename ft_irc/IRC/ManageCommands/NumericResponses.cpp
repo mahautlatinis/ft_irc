@@ -3,6 +3,9 @@
 // Return a string rep of n zero-padded whose final length is width
 static string	toStrZeroPadded(unsigned int n, int width)
 {
+	(void)n;
+	(void)width;
+
 	char	buf[16];
 	//sprintf(buf, "%0*u", width, n);
 	string	res(buf);
