@@ -43,18 +43,18 @@ OBJS		= $(SRCS:.cpp=.o)
 NAME		= ircserv
 
 CC			= clang++
-FLAGS		= -Wall -Wextra -Werror -std=c++98 #-g -fsanitize=address
+FLAGS		= -std=c++98 -Werror -Wall -Wextra
 
-RM			= rm -f
+RM			= rm -rf
 
 .cpp.o:
 			@$(CC) $(FLAGS) -I$(INC_DIR) -c $< -o $(<:.cpp=.o)
 
 $(NAME):	$(OBJS)
-			@echo "Object files compiled"
+			@echo "\033[0;32mObject files compiled successfully\033[0m"
 			@$(CC) $(FLAGS) $(OBJS) -I$(INC_DIR) -o $(NAME)
-			@echo "Executable created"
-			@echo "Compilation finished"
+			@echo "\033[0;32mExecutable created successfully\033[0m"
+			@echo "\033[0;32mCompilation finished successfully\033[0m"
 
 all:		$(NAME)
 

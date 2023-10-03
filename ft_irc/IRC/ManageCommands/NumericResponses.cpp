@@ -3,8 +3,11 @@
 // Return a string rep of n zero-padded whose final length is width
 static string	toStrZeroPadded(unsigned int n, int width)
 {
+	(void)n;
+	(void)width;
+
 	char	buf[16];
-	sprintf(buf, "%0*u", width, n);
+	//sprintf(buf, "%0*u", width, n);
 	string	res(buf);
 	return res;
 }
@@ -28,7 +31,7 @@ string	IRC::getResponseFromCode(User *user, int code, string params[]) const
 			ss.seekp(-1, std::ios_base::end); break;
 		case RPL_MYINFO:
 			ss  << IRC_HOST << ' ' << IRC_VER << ' ' << "biklmnopstv :" << CHAN_VALID_MODES; break;
-		
+
 		case RPL_UMODEIS:
 			ss  << ":" << params[0]; break;
 		case RPL_ADMINME:
@@ -39,7 +42,7 @@ string	IRC::getResponseFromCode(User *user, int code, string params[]) const
 			ss  << ":Location: " << params[0]; break;
 		case RPL_ADMINEMAIL:
 			ss  << ":Email: " << params[0]; break;
-		
+
 		case RPL_AWAY:
 			ss  << params[0] << " :" << params[1]; break;
 		case RPL_UNAWAY:
@@ -86,7 +89,7 @@ string	IRC::getResponseFromCode(User *user, int code, string params[]) const
 			ss  << ":You are now an IRC operator"; break;
 		case RPL_TIME:
 			ss  << IRC_HOST << " :" << params[0]; break;
-		
+
 		case ERR_NOSUCHNICK:
 			ss  << params[0] << " :No such nick"; break;
 		case ERR_NOSUCHCHANNEL:

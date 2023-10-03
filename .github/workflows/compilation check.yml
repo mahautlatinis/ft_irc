@@ -1,0 +1,17 @@
+name: compilation check
+
+on:
+  push:
+    branches: [ "validated" ]
+  pull_request:
+    branches: [ "validated" ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: compilation check
+      run: cd ft_irc; make -n; make; ./ircserv 6667;

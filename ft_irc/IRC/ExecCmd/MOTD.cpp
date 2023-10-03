@@ -13,7 +13,7 @@ static void	initMOTD()
 	{
 		char	*cwd(getcwd(NULL, 0));
 		std::cout	<< RED << "Cannot read message of the day from "
-					<< cwd << '/' << MOTD_FILE << '\n' << NC;
+					<< cwd << '/' << MOTD_FILE << std::endl << NC;
 		free(cwd);
 		return;
 	}
@@ -41,7 +41,7 @@ void	IRC::execMOTD(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 		{
 			motd += getResponseFromCode(
 				user, RPL_MOTD,
-				(string[]){ *it }	
+				(string[]){ *it }
 			);
 		}
 		motd += getResponseFromCode(user, RPL_ENDOFMOTD, NULL);
