@@ -51,8 +51,8 @@ RM			= rm -rf
 			@$(CC) $(FLAGS) -I$(INC_DIR) -c $< -o $(<:.cpp=.o)
 
 $(NAME):	$(OBJS)
-			GREEN='\033[0;32m'
-			NC='\033[0m'
+			@GREEN='\033[0;32m'
+			@NC='\033[0m'
 			@echo "${GREEN}Object files compiled${NC}"
 			@$(CC) $(FLAGS) $(OBJS) -I$(INC_DIR) -o $(NAME)
 			@echo "${GREEN}Executable created${NC}"
