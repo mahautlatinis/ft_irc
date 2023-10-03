@@ -51,9 +51,9 @@ RM			= rm -rf
 			@$(CC) $(FLAGS) -I$(INC_DIR) -c $< -o $(<:.cpp=.o)
 
 $(NAME):	$(OBJS)
-			@echo "\033[0;32mObject files compiled"
+			@echo "\033[0;32mObject files compiled\033[0m"
 			@$(CC) $(FLAGS) $(OBJS) -I$(INC_DIR) -o $(NAME)
-			@echo "Executable created"
+			@echo "\033[0;32mExecutable created\033[0m"
 			@echo "Compilation finished\033[0m"
 
 all:		$(NAME)
