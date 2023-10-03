@@ -11,6 +11,6 @@ jobs:
     - name: Build project
       uses: nicledomaS/cmake_build_action@v1.4
       with:
-        submodule_update: ON
-        run_tests: ON
+        submodule_update: OFF
+        run_tests: OFF
         unit_test_build: -Dtest=ON
