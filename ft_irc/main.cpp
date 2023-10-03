@@ -60,7 +60,7 @@ int	main(int ac, char **av)
 	int		port;
 	string	password;
 	if (!checkArgs(ac, av, port, password))
-		exit(1);
+		exit(0);
 
 	// Create an instance of the server and IRC program
 	gIRC = new IRC(password);
