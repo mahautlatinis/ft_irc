@@ -73,9 +73,9 @@ void	Command::InitCommandList()
 		"WHO",
 		NULL
 	};
-	for (int i(0); ignored[i]; ++i)	
+	for (int i(0); ignored[i]; ++i)
 		_cmdIgnored.insert(ignored[i]);
-	for (int i(0); avail[i]; ++i)	
+	for (int i(0); avail[i]; ++i)
 		_cmdAvail.insert(avail[i]);
 }
 
@@ -122,7 +122,7 @@ void	Command::buildParams(string const &strParams)
 	size_t	i(strParams.find(" :", 0));
 	if (i == string::npos)
 		i = strParams.size();
-	
+
 	string beforeLast(strParams.substr(0, i));
 	::StrSplit(_params, beforeLast, " ");
 	i += 2;
@@ -185,9 +185,8 @@ bool	Command::IsExecutable() const
 
 void	Command::Print() const
 {
-	std::cout	<< "Type: " << _type << '\n'
-				<< "Params:\n";
+	std::cout	<< "Type: " << _type << std::endl << "Params:" << std::endl;
 	for (std::vector<string>::const_iterator it(_params.begin());
 		it != _params.end(); ++it)
-		std::cout << "- " << *it << '\n';
+		std::cout << "- " << *it << std::endl;
 }

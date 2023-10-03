@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 19:24:27 by mahautlatin       #+#    #+#             */
+/*   Updated: 2023/10/03 19:30:18 by mahautlatin      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "network/Server.hpp"
 
 // Global pointers (only accessible from this source file)
@@ -16,7 +28,7 @@ static void	cleanup()
 static void	handleSignal(int signum)
 {
 	if (signum == SIGINT || signum == SIGQUIT)
-		std::cout << GREEN << "\b\bServer stopped. Good bye!\n" << NC;
+		std::cout << GREEN << "\b\bServer stopped. Good bye!" << std::endl << NC;
 	exit(0);
 }
 
@@ -28,19 +40,19 @@ static bool	checkArgs(int ac, char **av, int &port, string &password)
 		iPort = 1, iPassword = 2;
 	else if (ac == 4)
 	{
-		std::cout << "Multi-server is not implemented, second argument is ignored.\n";
+		std::cout << "Multi-server is not implemented, second argument is ignored" << std::endl;
 		iPort = 2, iPassword = 3;
 	}
 	else
 	{
-		std::cerr << "Invalid number of arguments\n";
+		std::cerr << "\033[0;32mInvalid number of arguments\033[0m" << std::endl;
 		return false;
 	}
 
 	port = std::atoi(av[iPort]);
 	if (port <= 0 || port > 0xffff)
 	{
-		std::cerr << "Invalid port number\n";
+		std::cerr << "Invalid port number" << std::endl;
 		return false;
 	}
 	password = string(av[iPassword]);

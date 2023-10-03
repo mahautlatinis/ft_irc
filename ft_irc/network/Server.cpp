@@ -55,7 +55,7 @@ void	Server::SetUp()
 				<< "IRC Server now active on "
 				<< inet_ntoa(sin.sin_addr)
 				<< ":" << _port
-				<< NC << '\n';
+				<< NC << std::endl;
 }
 
 void	Server::acceptClient()
@@ -66,10 +66,10 @@ void	Server::acceptClient()
 	int	clientFD(accept(_fd, (sockaddr *)&sin, &sin_len));
 	if (clientFD == -1)
 	{
-		std::cerr << "Failed to accept a new connection\n";
+		std::cerr << "Failed to accept a new connection" << std::endl;
 		return;
 	}
-	std::cout << "New client on socket #" << clientFD << '\n';
+	std::cout << "New client on socket #" << clientFD << std::endl;
 	_clients.insert(std::make_pair(clientFD, new Client(clientFD)));
 }
 

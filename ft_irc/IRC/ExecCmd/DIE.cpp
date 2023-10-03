@@ -10,6 +10,6 @@ void	IRC::execDIE(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 		pushToQueue(user->_fd, resp, responseQueue);
 		return;
 	}
-	std::cout << RED << user->_nick << " killed the server\n" << NC;
+	std::cout << RED << user->_nick << " killed the server" << std::endl << NC;
 	exit(0);
 }

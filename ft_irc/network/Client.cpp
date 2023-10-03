@@ -10,7 +10,7 @@ Client::Client(int fd) :
 Client::~Client()
 {
 	close(_fd);
-	std::cout << "Client on socket #" << _fd << " disconnected\n";
+	std::cout << "Client on socket #" << _fd << " disconnecte" << std::endl;
 }
 
 bool	Client::receiveCommand(string &cmd)
