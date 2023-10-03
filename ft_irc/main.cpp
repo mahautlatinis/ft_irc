@@ -61,10 +61,11 @@ int	main(int ac, char **av)
 	string	password;
 	if (!checkArgs(ac, av, port, password))
 		exit(1);
-	
+
 	// Create an instance of the server and IRC program
 	gIRC = new IRC(password);
 	gServer = new Server(port, password, *gIRC);
 	gServer->SetUp();
 	gServer->Run();
+	return 0;
 }
