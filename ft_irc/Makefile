@@ -54,7 +54,9 @@ $(NAME):	$(OBJS)
 			@echo "Object files compiled"
 			@$(CC) $(FLAGS) $(OBJS) -I$(INC_DIR) -o $(NAME)
 			@echo "Executable created"
-			@echo "Compilation finished"
+			GREEN='\033[0;32m'
+			NC='\033[0m'
+			@echo "${GREEN}Compilation finished${NC}"
 
 all:		$(NAME)
 
