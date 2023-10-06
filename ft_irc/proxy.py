@@ -3,7 +3,7 @@ import threading
 from time import sleep
 
 IN_ADDR = ('0.0.0.0', 3333)
-OUT_ADDR = ('127.0.0.1', 6667)
+OUT_ADDR = ('127.0.0.1', 6668)
 BUFF_SIZE = 512
 DELIM = "\r\n"
 
