@@ -17,12 +17,7 @@ string	IRC::getResponseFromCode(User *user, int code, string params[]) const
 		<< " " << user->_nick << " ";
 
 	std::string comma;
-
-	// #ifdef __APPLE__
-	// 	comma = "";
-	// #else 
 	comma = ":";
-	// #endif
 
 	switch (code)
 	{
