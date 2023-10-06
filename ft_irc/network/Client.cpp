@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:55:42 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 19:58:11 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/06 22:02:39 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Client::Client(int fd): _fd(fd)
 Client::~Client(void)
 {
 	close(_fd);
-	std::cout << "Client on socket #" << _fd << " disconnecte" << std::endl;
+	std::cout << "Client on socket #" << _fd << " disconnected." << std::endl;
 	return ;
 }
 

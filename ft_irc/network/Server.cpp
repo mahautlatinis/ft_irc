@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:58:30 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 20:04:06 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/06 22:02:50 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,12 +158,12 @@ void	Server::recvProcessCommand
 				cmd.clear();
 				if (!_clients[fd]->receiveCommand(cmd))
 				{
-					_irc.ClientDisconnect(fd);
+					_irc.clientDisconnect(fd);
 					removeClient(fd);
 				}
-				else if (!cmd.empty() && _irc.ProcessClientCommand(std::make_pair(fd, cmd), responseQueue))
+				else if (!cmd.empty() && _irc.processClientCommand(std::make_pair(fd, cmd), responseQueue))
 					disconnectList.insert(fd);
-				int	victimFD = _irc.GetVictim();
+				int	victimFD = _irc.getVictim();
 				if (victimFD != -1)
 					disconnectList.insert(victimFD);
 			}

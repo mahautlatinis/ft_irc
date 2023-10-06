@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:19:48 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 20:56:36 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/06 23:06:17 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	IRC::passwordNotOK(User *user,
 {
 	string	resp(getErrorResponse(user, "Access denied by configuration"));
 	pushToQueue(user->_fd, resp, responseQueue);
-	ClientDisconnect(user->_fd);
+	clientDisconnect(user->_fd);
 	return true;
 }
 
@@ -74,8 +74,15 @@ string	IRC::appendUserNotif
 void	IRC::pushToQueue(int fd, string const &msg,
 	std::vector<t_clientCmd> &responseQueue) const
 {
+	stringstream	ss;
+
 	if (fd == BOT_FD)
 		return;
+	
+	ss << msg << CMD_DELIM;
+
+	// For debug purposes
+	// std::cout << ss.str() << std::endl;
 	responseQueue.push_back(std::make_pair(fd, msg));
 	return ;
 }

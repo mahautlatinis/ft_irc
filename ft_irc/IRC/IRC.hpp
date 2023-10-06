@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:09:48 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 21:04:00 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/06 21:09:23 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ class	IRC
 
 		User						*getUserByNick(string const &nick) const;
 		Channel						*getChannelByName(string const &name) const;
-		bool						ProcessClientCommand(t_clientCmd const &command, std::vector<t_clientCmd> &responseQueue);
-		void						ClientDisconnect(int fd);
-		int							GetVictim();
+		bool						processClientCommand(t_clientCmd const &command, std::vector<t_clientCmd> &responseQueue);
+		void						clientDisconnect(int fd);
+		int							getVictim();
 
 	private:
 		time_t const				_startupTime;	// Start-up time

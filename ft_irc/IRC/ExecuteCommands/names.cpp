@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   NAMES.cpp                                          :+:      :+:    :+:   */
+/*   names.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:50:42 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 18:53:16 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/06 23:05:55 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ void	IRC::names(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {
 	std::vector<string>			chanNames;
 	string						name;
-	User						*user(cmd._user);
 	string						resp;
-	Channel						*chan(getChannelByName(name));
 	string						names;
 	std::set<User *>::iterator	it;
 	
@@ -29,6 +27,9 @@ void	IRC::names(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 		::strSplit(chanNames, cmd._params[0], ",");
 		name = chanNames.front();
 	}
+
+	Channel	*chan(getChannelByName(name));
+	User	*user(cmd._user);
 	
 	if (chan)
 	{
@@ -36,14 +37,14 @@ void	IRC::names(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 		for (it = chan->_users.begin(); it != chan->_users.end(); ++it)
 		{
 			if (!joined && (*it)->_invisible)
-				continue;
+				continue ;
 			if (chan->isOperator(*it))
 				names += "@";
 			names += (*it)->_nick + " ";
 		}
 
 		if (!names.empty())
-		{
+		{;
 			if (names[names.size() - 1] == ' ')
 				names.erase(names.size() - 1, 1);
 			resp = getResponseFromCode(

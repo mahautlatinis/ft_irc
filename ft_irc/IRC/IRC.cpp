@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:56:21 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 20:58:07 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/06 21:09:01 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ IRC::~IRC(void)
 	return ;
 }
 
-bool	IRC::ProcessClientCommand(t_clientCmd const &command,
+bool	IRC::processClientCommand(t_clientCmd const &command,
 	std::vector<t_clientCmd> &responseQueue)
 {
 	User				*user;
@@ -99,7 +99,7 @@ bool	IRC::ProcessClientCommand(t_clientCmd const &command,
 	return false;
 }
 
-void	IRC::ClientDisconnect(int fd)
+void	IRC::clientDisconnect(int fd)
 {
 	User	*user(_users[fd]);
 	
@@ -113,7 +113,7 @@ void	IRC::ClientDisconnect(int fd)
 	return ; 
 }
 
-int	IRC::GetVictim(void)
+int	IRC::getVictim(void)
 {
 	int	res = _killing;
 	_killing = -1;
