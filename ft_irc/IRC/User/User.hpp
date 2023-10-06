@@ -1,5 +1,16 @@
-#ifndef USER_HPP
-#define USER_HPP
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   User.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 20:11:25 by mahautlatin       #+#    #+#             */
+/*   Updated: 2023/10/06 20:17:58 by mahautlatin      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#pragma once
 
 #include "../../includes/Headers.hpp"
 
@@ -11,46 +22,41 @@
 
 class	User
 {
+	public:
+		
 
-private:
-	int		_fd;			// fd of user's network client, used for unique identifier
-	bool	_passwordOK;	// Has user entered good password ?
-	bool	_registered;	// Is user registered ?
-	string	_nick;			// Nickname
-	string	_uname;			// Username
-	string	_rname;			// Real name
-	string	_prefix;		// User's prefix in network messages
-	std::set<Channel *>	_joined;	// List of channels user has joined
+		User(int fd);
+		virtual ~User(void);
 
-	// User's modes
+		static bool			checkNickValidChars(string const &nick);
+		bool				isUsernameDefault() const;
+		bool				isAway() const;
+		bool				isVisible() const;
 
-	string	_awayMsg;		// (a) Away message
-	bool	_invisible;		// (i) Is invisible
-	bool	_oper;			// (o) Is server operator
-	bool	_bot;			// (B) Is a bot
+		void				setNick(string const &nick);
+		void				setUsername(string const &uname);
+		string				getModes() const;
 
-protected:
-	User(int fd, string const &botNick);
-	void	registrationOK();
+		int					tryJoin(Channel *chan, string const &key);
+		int					trySetMode(bool plus, char mode);
+		friend class		IRC;
 
-public:
-	static bool	CheckNickValidChars(string const &nick);
+	private:
+		int					_fd;			// fd of user's network client, used for unique identifier
+		bool				_passwordOK;	// Has user entered good password ?
+		bool				_registered;	// Is user registered ?
+		string				_nick;			// Nickname
+		string				_uname;			// Username
+		string				_rname;			// Real name
+		string				_prefix;		// User's prefix in network messages
+		std::set<Channel *>	_joined;		// List of channels user has joined
 
-	User(int fd);
-	virtual ~User();
+		string				_awayMsg;		// (a) Away message
+		bool				_invisible;		// (i) Is invisible
+		bool				_oper;			// (o) Is server operator
+		bool				_bot;			// (B) Is a bot
 
-	bool	IsUsernameDefault() const;
-	bool	IsAway() const;
-	bool	IsVisible() const;
-
-	void	SetNick(string const &nick);
-	void	SetUsername(string const &uname);
-	string	GetModes() const;
-
-	int		TryJoin(Channel *chan, string const &key);
-	int		TrySetMode(bool plus, char mode);
-
-	friend class IRC;
+	protected:
+		User(int fd, string const &botNick);
+		void				registrationOK();
 };
-
-#endif

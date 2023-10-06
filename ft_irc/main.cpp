@@ -6,13 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 19:24:27 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/03 19:34:00 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/06 20:03:50 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "network/Server.hpp"
-
-// Global pointers (only accessible from this source file)
 
 IRC		*gIRC = NULL;
 Server	*gServer = NULL;
@@ -61,23 +59,19 @@ static bool	checkArgs(int ac, char **av, int &port, string &password)
 
 int	main(int ac, char **av)
 {
-	// Register clean up function at exit
 	atexit(cleanup);
 
-	// Register signals to end program
 	signal(SIGINT, handleSignal);
 	signal(SIGQUIT, handleSignal);
 
-	// Check and obtain information from arguments
 	int		port;
 	string	password;
 	if (!checkArgs(ac, av, port, password))
 		exit(0);
 
-	// Create an instance of the server and IRC program
 	gIRC = new IRC(password);
 	gServer = new Server(port, password, *gIRC);
-	gServer->SetUp();
-	gServer->Run();
-	return 0;
+	gServer->setUp();
+	gServer->run();
+	return (0);
 }

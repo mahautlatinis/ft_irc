@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Colors.hpp                                         :+:      :+:    :+:   */
+/*   DIE.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 20:23:43 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 20:26:36 by mahautlatin      ###   ########.fr       */
+/*   Created: 2023/10/06 18:27:11 by mahautlatin       #+#    #+#             */
+/*   Updated: 2023/10/06 18:27:38 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "../IRC.hpp"
 
-#define NC		"\e[0m"
-#define RED		"\e[0;31m"
-#define GREEN	"\e[0;32m"
-#define BLUE	"\e[0;34m"
-#define YELLOW	"\e[33m"
-#define BOLD	"\e[1m"
-#define UNDER	"\e[4m"
+void	IRC::die(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
+{
+	User	*user(cmd._user);
+
+	if (!user->_oper)
+	{
+		string	resp(getResponseFromCode(user, ERR_NOPRIVILEGES, NULL));
+		pushToQueue(user->_fd, resp, responseQueue);
+		return;
+	}
+	std::cout << RED << user->_nick << " killed the server" << std::endl << NC;
+	exit(0);
+}

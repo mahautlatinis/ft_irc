@@ -1,48 +1,51 @@
-#ifndef COMMONS_HPP
-#define COMMONS_HPP
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Commons.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 20:24:30 by mahautlatin       #+#    #+#             */
+/*   Updated: 2023/10/06 20:26:25 by mahautlatin      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define CMD_DELIM	"\r\n"
-#define LEN_DELIM	2
+#pragma once
 
-#define IRC_HOST	"ft-irc.42.fr"		// Server's hostname
-#define IRC_VER		"ft_irc v1.0"		// IRC server version
-#define USR_HOST	"user.ft-irc.42.fr"	// User's default hostname
+#define CMD_DELIM	            "\r\n"
+#define LEN_DELIM	            2
 
-// Default admin's info for ADMIN query
+#define IRC_HOST	            "ft-irc.42.fr"
+#define IRC_VER		            "ft_irc v1.0"
+#define USR_HOST	            "user.ft-irc.42.fr"
 
-#define ADMIN_NAME	"Damien Dam"
-#define ADMIN_LOC	"Paris FR"
-#define ADMIN_EMAIL	"qdam@student.42.fr"
+#define ADMIN_NAME	            "Damien Dam"
+#define ADMIN_LOC	            "Paris FR"
+#define ADMIN_EMAIL             "qdam@student.42.fr"
 
-#define MOTD_FILE	"motd"	// Path to message of the day
+#define MOTD_FILE	            "motd"
 
-// Username and password for OPER command
+#define OPER_USERNAME	        "admin"
+#define OPER_PASSWORD	        "ftirc"
 
-#define OPER_USERNAME	"admin"
-#define OPER_PASSWORD	"ftirc"
-
-// Bot-related stuffs
-
-#define BOT_FD			-1
-#define BOT_NICKNAME	"MrBot"
+#define BOT_FD			        -1
+#define BOT_NICKNAME	        "MrBot"
 
 using	std::string;
 using	std::stringstream;
-typedef std::pair<int, string>	t_clientCmd;
+typedef std::pair<int, string>  t_clientCmd;
 
-// Internal classes
+class	                        Server;
+class	                        Client;
+class	                        IRC;
+class	                        Channel;
+class	                        User;
+class	                        Bot;
+class	                        Command;
 
-class	Server;
-class	Client;
-class	IRC;
-class	Channel;
-class	User;
-class	Bot;
-class	Command;
+void	                        strSplit(std::vector<string> &results,
+                                    string const &str,
+                                    string const &delim);
 
-// No-scope utility functions
-
-void	StrSplit(std::vector<string> &results, string const &str, string const &delim);
-bool	StrMatch(char const *mask, char const *str);
-
-#endif
+bool	                        strMatch(char const *mask,
+                                    char const *str);

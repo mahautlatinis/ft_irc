@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Client.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 19:55:42 by mahautlatin       #+#    #+#             */
+/*   Updated: 2023/10/06 22:02:39 by mahautlatin      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Client.hpp"
 
-Client::Client(int fd) :
-	_fd(fd)
+Client::Client(int fd): _fd(fd)
 {
-	// Make reading and writing to fd non-blocking
 	fcntl(fd, F_SETFL, O_NONBLOCK);
+	return ;
 }
 
-Client::~Client()
+Client::~Client(void)
 {
 	close(_fd);
-	std::cout << "Client on socket #" << _fd << " disconnecte" << std::endl;
+	std::cout << "Client on socket #" << _fd << " disconnected." << std::endl;
+	return ;
 }
 
 bool	Client::receiveCommand(string &cmd)
@@ -19,14 +31,10 @@ bool	Client::receiveCommand(string &cmd)
 	if (r <= 0)
 		return false;
 
-	// Null terminate command received
 	_buffer[r] = '\0';
 
-	// Add to current command builder
 	_cmdBuilder += _buffer;
 
-	// Try finding delimiter at the end of the command. If found, put everything
-	// to cmd then reset command builder
 	if (_cmdBuilder.find(CMD_DELIM, _cmdBuilder.size() - LEN_DELIM) != string::npos)
 	{
 		cmd = _cmdBuilder;
@@ -38,4 +46,5 @@ bool	Client::receiveCommand(string &cmd)
 void	Client::sendResponse(string const &resp)
 {
 	send(_fd, resp.c_str(), resp.size(), 0);
+	return ;
 }

@@ -1,36 +1,36 @@
 INC_DIR		= .
 
 SRCS		=	./main.cpp \
-				./IRC/ManageUsers/ManUser.cpp \
-				./IRC/ExecCmd/PART.cpp \
-				./IRC/ExecCmd/PASS.cpp \
-				./IRC/ExecCmd/WHO.cpp \
-				./IRC/ExecCmd/TIME.cpp \
-				./IRC/ExecCmd/DIE.cpp \
-				./IRC/ExecCmd/KICK.cpp \
-				./IRC/ExecCmd/OPER.cpp \
-				./IRC/ExecCmd/KILL.cpp \
-				./IRC/ExecCmd/NAMES.cpp \
-				./IRC/ExecCmd/TOPIC.cpp \
-				./IRC/ExecCmd/PRIVMSG.cpp \
-				./IRC/ExecCmd/USER.cpp \
-				./IRC/ExecCmd/NICK.cpp \
-				./IRC/ExecCmd/LIST.cpp \
-				./IRC/ExecCmd/PING.cpp \
-				./IRC/ExecCmd/AWAY.cpp \
-				./IRC/ExecCmd/QUIT.cpp \
-				./IRC/ExecCmd/NOTICE.cpp \
-				./IRC/ExecCmd/INVITE.cpp \
-				./IRC/ExecCmd/JOIN.cpp \
-				./IRC/ExecCmd/MODE.cpp \
-				./IRC/ExecCmd/ADMIN.cpp \
-				./IRC/ExecCmd/MOTD.cpp \
-				./IRC/ExecCmd/VERSION.cpp \
-				./IRC/ManageChannels/ManChannel.cpp \
+				./IRC/ManageUsers/ManageUsers.cpp \
+				./IRC/ExecuteCommands/part.cpp \
+				./IRC/ExecuteCommands/pass.cpp \
+				./IRC/ExecuteCommands/who.cpp \
+				./IRC/ExecuteCommands/time.cpp \
+				./IRC/ExecuteCommands/die.cpp \
+				./IRC/ExecuteCommands/kick.cpp \
+				./IRC/ExecuteCommands/oper.cpp \
+				./IRC/ExecuteCommands/kill.cpp \
+				./IRC/ExecuteCommands/names.cpp \
+				./IRC/ExecuteCommands/topic.cpp \
+				./IRC/ExecuteCommands/privmsg.cpp \
+				./IRC/ExecuteCommands/user.cpp \
+				./IRC/ExecuteCommands/nick.cpp \
+				./IRC/ExecuteCommands/list.cpp \
+				./IRC/ExecuteCommands/ping.cpp \
+				./IRC/ExecuteCommands/away.cpp \
+				./IRC/ExecuteCommands/quit.cpp \
+				./IRC/ExecuteCommands/notice.cpp \
+				./IRC/ExecuteCommands/invite.cpp \
+				./IRC/ExecuteCommands/join.cpp \
+				./IRC/ExecuteCommands/mode.cpp \
+				./IRC/ExecuteCommands/admin.cpp \
+				./IRC/ExecuteCommands/motd.cpp \
+				./IRC/ExecuteCommands/version.cpp \
+				./IRC/ManageChannels/ManageChannels.cpp \
 				./IRC/Command/Command.cpp \
 				./IRC/Utils.cpp \
 				./IRC/ManageCommands/NumericResponses.cpp \
-				./IRC/ManageCommands/ManCmd.cpp \
+				./IRC/ManageCommands/ManageCommands.cpp \
 				./IRC/Channel/Channel.cpp \
 				./IRC/User/Bot.cpp \
 				./IRC/User/User.cpp \
@@ -51,20 +51,20 @@ RM			= rm -rf
 			$(CC) $(FLAGS) -I$(INC_DIR) -c $< -o $(<:.cpp=.o)
 
 $(NAME):	$(OBJS)
-			echo "\033[0;32mObject files compiled successfully\033[0m"
+			@ echo "\033[0;32mObject files compiled successfully\033[0m"
 			$(CC) $(FLAGS) $(OBJS) -I$(INC_DIR) -o $(NAME)
-			echo "\033[0;32mExecutable created successfully\033[0m"
-			echo "\033[0;32mCompilation finished successfully\033[0m"
+			@ echo "\033[0;32mExecutable created successfully\033[0m"
+			@ echo "\033[0;32mCompilation finished successfully\033[0m"
 
 all:		$(NAME)
 
 clean:
 			$(RM) $(OBJS)
-			echo "Deleted all but executable"
+			@ echo "Deleted all but executable"
 
 fclean:		clean
 			$(RM) $(NAME)
-			echo "Everything deleted"
+			@ echo "Everything deleted"
 
 re:			fclean all
 

@@ -1,17 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bot.cpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 20:06:36 by mahautlatin       #+#    #+#             */
+/*   Updated: 2023/10/06 21:01:31 by mahautlatin      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bot.hpp"
 
 #define	PYTHON_PORT	33333
 #define	BUFFER_SIZE	512
 
-Bot::Bot() : User(BOT_FD, BOT_NICKNAME)
+Bot::Bot(void): User(BOT_FD, BOT_NICKNAME)
 {
 	registrationOK();
+	return ;
 }
 
 Bot::~Bot()
-{}
+{
+	return ;
+}
 
-string	Bot::cmdHELP()
+string	Bot::cmdHELP(void)
 {
 	return string("'00,01CALC01,00 (expr)01' Calculate a simple math expression (only digits and +-*/^ operators). ")
 			+ "'00,01QUOTE01' Get a random quote from the Internet.";
@@ -19,7 +34,7 @@ string	Bot::cmdHELP()
 
 string	Bot::cmdCALC(string const &expr)
 {
-	static string const	validChar("0123456789+-*/^(). ");
+	static string const			validChar("0123456789+-*/^(). ");
 	static std::set<char> const	validCharSet(validChar.begin(), validChar.end());
 
 	if (expr.empty())
@@ -31,14 +46,15 @@ string	Bot::cmdCALC(string const &expr)
 	return getResponseFromPython("CALC " + expr);
 }
 
-string	Bot::cmdQUOTE()
-{ return getResponseFromPython("QUOTE"); }
+string	Bot::cmdQUOTE(void)
+{
+	return getResponseFromPython("QUOTE");
+}
 
 string	Bot::getResponseFromPython(string const &botRequest)
 {
 	string const	errorMsg("04ERROR ");
 
-	// Setup client socket & error checking
 	int	sv(socket(AF_INET, SOCK_STREAM, 0));
 	if (sv < 0)
 		return errorMsg + "Socket cannot be created";
@@ -86,7 +102,6 @@ string	Bot::processUserMsg(string const &msg)
 {
 	string	cmdType, cmdContent;
 
-	// Pre-process command 
 	size_t	firstSpace(msg.find(' '));
 	if (firstSpace == string::npos)
 		cmdType = msg;
@@ -95,6 +110,7 @@ string	Bot::processUserMsg(string const &msg)
 		cmdType = msg.substr(0, firstSpace);
 		cmdContent = msg.substr(firstSpace + 1);
 	}
+	
 	std::transform(cmdType.begin(), cmdType.end(), cmdType.begin(), ::toupper);
 
 	if (cmdType == "HELP")

@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ManUser.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 18:50:09 by mahautlatin       #+#    #+#             */
+/*   Updated: 2023/10/06 18:50:17 by mahautlatin      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../IRC.hpp"
 
-// Return the pointer to the user with nickname nick, or NULL if not found
 User	*IRC::getUserByNick(string const &nick) const
 {
 	for (std::map<int, User *>::const_iterator it(_users.begin());
@@ -10,34 +21,34 @@ User	*IRC::getUserByNick(string const &nick) const
 	return NULL;
 }
 
-// Delete user from a channel when they leave
 void	IRC::userLeaveChannel(User *user, Channel *chan)
 {
 	user->_joined.erase(chan);
-	if (chan->RemoveUser(user) == 0)
+	if (chan->removeUser(user) == 0)
 	{
 		_channels.erase(chan->_name);
 		delete chan;
 	}
+	return ;
 }
 
-// Delete user from every channel he is in
 void	IRC::removeFromAllChannel(User *user)
 {
 	std::map<string, Channel *>	chansCopy(_channels);
-	Channel	*chan;
+	Channel						*chan;
+
 	for (std::map<string, Channel *>::iterator it(chansCopy.begin());
 		it != chansCopy.end(); ++it)
 	{
 		chan = it->second;
-		if (chan->HasJoined(user))
+		if (chan->hasJoined(user))
 			userLeaveChannel(user, chan);
-		else if (chan->IsInvited(user))
+		else if (chan->isInvited(user))
 			chan->_invitations.erase(user);
 	}
+	return ;
 }
 
-// Send new user welcome messages with useful information about server
 void	IRC::sendWelcomeMessage(User *user, std::vector<t_clientCmd> &responseQueue)
 {
 	string	resp(
@@ -47,7 +58,7 @@ void	IRC::sendWelcomeMessage(User *user, std::vector<t_clientCmd> &responseQueue
 		+ getResponseFromCode(user, RPL_MYINFO, NULL)
 	);
 	pushToQueue(user->_fd, resp, responseQueue);
-	// Create a MOTD command to be executed right away
 	Command	cmdMOTD(user, "MOTD");
-	execMOTD(cmdMOTD, responseQueue);
+	motd(cmdMOTD, responseQueue);
+	return ;
 }
