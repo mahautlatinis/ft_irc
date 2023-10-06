@@ -48,23 +48,23 @@ FLAGS		= -std=c++98 -Werror -Wall -Wextra
 RM			= rm -rf
 
 .cpp.o:
-			@$(CC) $(FLAGS) -I$(INC_DIR) -c $< -o $(<:.cpp=.o)
+			$(CC) $(FLAGS) -I$(INC_DIR) -c $< -o $(<:.cpp=.o)
 
 $(NAME):	$(OBJS)
-			@echo "\033[0;32mObject files compiled successfully\033[0m"
-			@$(CC) $(FLAGS) $(OBJS) -I$(INC_DIR) -o $(NAME)
-			@echo "\033[0;32mExecutable created successfully\033[0m"
-			@echo "\033[0;32mCompilation finished successfully\033[0m"
+			echo "\033[0;32mObject files compiled successfully\033[0m"
+			$(CC) $(FLAGS) $(OBJS) -I$(INC_DIR) -o $(NAME)
+			echo "\033[0;32mExecutable created successfully\033[0m"
+			echo "\033[0;32mCompilation finished successfully\033[0m"
 
 all:		$(NAME)
 
 clean:
-			@$(RM) $(OBJS)
-			@echo "Deleted all but executable"
+			$(RM) $(OBJS)
+			echo "Deleted all but executable"
 
 fclean:		clean
-			@$(RM) $(NAME)
-			@echo "Everything deleted"
+			$(RM) $(NAME)
+			echo "Everything deleted"
 
 re:			fclean all
 
