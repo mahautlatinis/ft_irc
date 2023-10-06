@@ -1,15 +1,11 @@
 #include "../IRC.hpp"
 
-// Return a string rep of n zero-padded whose final length is width
-// static string	toStrZeroPadded(unsigned int n, int width)
-// {
-// 	(void)n;
-// 	(void)width;
-
-// 	char	buf[16];
-// 	string	res(buf);
-// 	return res;
-// }
+static string	toStrZeroPadded(void)
+{
+	char	buf[16];
+	string	res(buf);
+	return res;
+}
 
 // Return a response from a valid code
 string	IRC::getResponseFromCode(User *user, int code, string params[]) const
@@ -17,7 +13,7 @@ string	IRC::getResponseFromCode(User *user, int code, string params[]) const
 	stringstream	ss;
 
 	ss	<<	_prefix
-		// << " " << toStrZeroPadded(code, 3)
+		<< " " << toStrZeroPadded()
 		<< " " << user->_nick << " ";
 
 	std::string comma;
