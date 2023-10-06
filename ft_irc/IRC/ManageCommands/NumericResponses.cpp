@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:21:34 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 22:55:07 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/06 23:12:37 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ string	IRC::getResponseFromCode(User *user, int code,
 	std::string		comma;
 
 	comma = ":";
-
 	if (!__APPLE__)
 	{
+		// Group project was validated on linux VM like this
 		ss	<<	_prefix
 			<< " " << toStrZeroPadded()
 			<< " " << user->_nick << " ";
@@ -37,10 +37,6 @@ string	IRC::getResponseFromCode(User *user, int code,
 	{
 		ss << _prefix << " " << code << " " << user->_nick << " ";
 	}
-
-	std::string comma;
-	comma = ":";
-
 	switch (code)
 	{
 		case RPL_WELCOME:
@@ -176,6 +172,6 @@ string	IRC::getResponseFromCode(User *user, int code,
 			break;
 		default: break;
 	}
-	ss	<< CMD_DELIM;
+	ss << CMD_DELIM;
 	return ss.str();
 }
