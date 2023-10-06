@@ -38,6 +38,9 @@ string	IRC::getResponseFromCode(User *user, int code,
 		ss << _prefix << " " << code << " " << user->_nick << " ";
 	}
 
+	std::string comma;
+	comma = ":";
+
 	switch (code)
 	{
 		case RPL_WELCOME:
