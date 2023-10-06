@@ -1,53 +1,54 @@
-#ifndef CHANNEL_HPP
-#define CHANNEL_HPP
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Channel.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 17:53:19 by mahautlatin       #+#    #+#             */
+/*   Updated: 2023/10/06 20:29:55 by mahautlatin      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#pragma once 
 
 #include "../../includes/Headers.hpp"
 #include "../User/User.hpp"
 
-#define CHAN_PREFIX	"#"
-
+#define CHAN_PREFIX			"#"
 #define CHAN_VALID_MODES	"ikot"
 #define CHAN_ALL_MODES		"biklmnopstv"
-
 #define CHAN_ILLEGAL_CHARS	"\a,: "
 
 class	Channel
 {
+	private:
+		string const		_name;				// Channel's name
+		std::set<User *>	_users;				// List of users joined
+		string				_topic;				// Channel's topic
+		bool				_invitationOnly;	// (i) Only invited user can join
+		string				_key;				// (k) Channel's key
+		std::set<User *>	_operators;			// (o) List of operators
+		bool				_anyoneCanSetTopic;	// (t) Anyone can set topic
+		std::set<User *>	_invitations;		// List of users being invited
 
-private:
-	string const		_name;		// Channel's name
-	std::set<User *>	_users;		// List of users joined
-	string	_topic;					// Channel's topic
+	public:
+		Channel(string const &name, User *creator);
+		virtual ~Channel(void);
 
-	// Channel's modes
+		static bool			isPrefix(char c);
+		static bool			isNameLegal(string const &name);
+		static bool			modeNeedsParam(char mode, string &errorName);
 
-	bool	_invitationOnly;		// (i) Only invited user can join
-	string	_key;					// (k) Channel's key
-	std::set<User *>	_operators;	// (o) List of operators
-	bool	_anyoneCanSetTopic;		// (t) Anyone can set topic
+		int					tryAddUser(User *user, string const &key);
+		int					removeUser(User *user);
+		int					trySetMode(IRC *irc, bool plus, char mode, string const &param);
+		bool				isOperator(User *user) const;
+		bool				hasJoined(User *user) const;
+		bool				hasKey() const;
+		bool				isInvited(User *user) const;
+		string				getModes() const;
+		int					getVisibleUsers() const;
 
-	std::set<User *>	_invitations;	// List of users being invited
-
-public:
-	static bool	IsPrefix(char c);
-	static bool	NameLegal(string const &name);
-	static bool	ModeNeedsParam(char mode, string &errorName);
-
-	Channel(string const &name, User *creator);
-	virtual ~Channel();
-
-	int	TryAddUser(User *user, string const &key);
-	int	RemoveUser(User *user);
-	int	TrySetMode(IRC *irc, bool plus, char mode, string const &param);
-
-	bool	IsOperator(User *user) const;
-	bool	HasJoined(User *user) const;
-	bool	HasKey() const;
-	bool	IsInvited(User *user) const;
-	string	GetModes() const;
-	int		GetVisibleUsers() const;
-
-	friend class IRC;
+		friend class IRC;
 };
-
-#endif

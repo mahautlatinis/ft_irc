@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Server.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 19:58:30 by mahautlatin       #+#    #+#             */
+/*   Updated: 2023/10/06 20:04:06 by mahautlatin      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Server.hpp"
 
 Server::Server(int port, string const &password, IRC &irc) :
@@ -5,19 +17,21 @@ Server::Server(int port, string const &password, IRC &irc) :
 	_password(password),
 	_irc(irc),
 	_fd(-1)
-{}
+{
+	return ;
+}
 
-Server::~Server()
+Server::~Server(void)
 {
 	std::map<int, Client *>::iterator	clientIter;
 	for (clientIter = _clients.begin(); clientIter != _clients.end(); ++clientIter)
 		delete clientIter->second;
 	close(_fd);
+	return ;
 }
 
-void	Server::SetUp()
+void	Server::setUp(void)
 {
-	// Create server socket
 	protoent	*prot(getprotobyname("tcp"));
 #ifdef __APPLE__
 	if ((_fd = socket(AF_INET, SOCK_STREAM, prot->p_proto)) == -1)
@@ -30,7 +44,6 @@ void	Server::SetUp()
 	fcntl(_fd, F_SETFL, O_NONBLOCK);
 #endif
 
-	// Set options for socket
 	int	opt(1);
 #ifdef __APPLE__
 	if (setsockopt(_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(int)) == -1)
@@ -39,7 +52,6 @@ void	Server::SetUp()
 #endif
 		SERVER_ERR("setsockopt");
 
-	// Bind socket to port
 	sockaddr_in	sin;
 	sin.sin_family = AF_INET;
 	sin.sin_addr.s_addr = INADDR_ANY;
@@ -47,7 +59,6 @@ void	Server::SetUp()
 	if (bind(_fd, (sockaddr *)&sin, sizeof(sin)) == -1)
 		SERVER_ERR("bind");
 
-	// Listen for connections
 	if (listen(_fd, MAX_LISTEN) == -1)
 		SERVER_ERR("listen");
 
@@ -56,9 +67,10 @@ void	Server::SetUp()
 				<< inet_ntoa(sin.sin_addr)
 				<< ":" << _port
 				<< NC << std::endl;
+	return ;
 }
 
-void	Server::acceptClient()
+void	Server::acceptClient(void)
 {
 	sockaddr_in	sin;
 	socklen_t	sin_len = 0;
@@ -80,9 +92,10 @@ void	Server::removeClient(int fd)
 		delete _clients[fd];
 		_clients.erase(fd);
 	}
+	return ;
 }
 
-void	Server::Run()
+void	Server::run(void)
 {
 	int	totalFD;
 	std::vector<t_clientCmd>	responseQueue;
@@ -97,17 +110,16 @@ void	Server::Run()
 		totalFD = setFDForReading();
 		recvProcessCommand(totalFD, responseQueue, disconnectList);
 
-		// Send server's response to clients
 		for (rIt = responseQueue.begin(); rIt != responseQueue.end(); ++rIt)
 		{
 			int	clientFD = rIt->first;
 			if (_clients.find(clientFD) != _clients.end())
 				_clients[clientFD]->sendResponse(rIt->second);
 		}
-		// Disconnect FDs in list
 		for (dIt = disconnectList.begin(); dIt != disconnectList.end(); ++dIt)
 			removeClient(*dIt);
 	}
+	return ;
 }
 
 int	Server::setFDForReading()
@@ -136,8 +148,6 @@ void	Server::recvProcessCommand
 {
 	string	cmd;
 
-	// Checking each socket for reading, starting from FD 3 because there should be nothing
-	// to read from 0 (stdin), 1 (stdout) and 2 (stderr)
 	for (int fd = 3; fd <= _maxFD && totalFD; ++fd)
 		if (FD_ISSET(fd, &_fdReader))
 		{
@@ -146,20 +156,18 @@ void	Server::recvProcessCommand
 			else if (disconnectList.find(fd) == disconnectList.end())
 			{
 				cmd.clear();
-				// Receive a full command, with delimiter, then send it to program to process,
-				// then grab program's response(s)
 				if (!_clients[fd]->receiveCommand(cmd))
 				{
-					_irc.ClientDisconnect(fd);	// Tell the program that client is disconnected
+					_irc.ClientDisconnect(fd);
 					removeClient(fd);
 				}
 				else if (!cmd.empty() && _irc.ProcessClientCommand(std::make_pair(fd, cmd), responseQueue))
 					disconnectList.insert(fd);
-				// Victim is the one being killed by an operator
 				int	victimFD = _irc.GetVictim();
 				if (victimFD != -1)
 					disconnectList.insert(victimFD);
 			}
 			--totalFD;
 		}
+	return ;
 }

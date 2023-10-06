@@ -1,32 +1,39 @@
-#ifndef COMMAND_HPP
-#define COMMAND_HPP
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Command.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 17:53:31 by mahautlatin       #+#    #+#             */
+/*   Updated: 2023/10/06 20:30:29 by mahautlatin      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#pragma once
 
 #include "../../includes/Headers.hpp"
 
 class	Command
 {
-	User	*_user;
-	string	_type;
-	std::vector<string>	_params;
+	public:
+		Command(User *user, string const &cmd);
+		virtual ~Command(void);
 
-	void	deduceType(string &cmd);
-	void	buildParams(string const &strParams);
-	
-	void	treatTOPIC(string const &rawCmd);
-	void	treatMODE();
-	void	treatPRIVMSG_NOTICE();
+		bool				isValid() const;
+		bool				isExecutable() const;
 
-public:
-	static void	InitCommandList();
-	Command(User *user, string const &cmd);
-	virtual ~Command();
+		static void			initCommandList();
+		friend class		IRC;
 
-	bool	IsValid() const;
-	bool	IsExecutable() const;
+	private:
+		User				*_user;
+		string				_type;
+		std::vector<string>	_params;
 
-	void	Print() const;	// for debugging
-
-	friend class IRC;
+		void				deduceType(string &cmd);
+		void				buildParams(string const &strParams);
+		void				treatTOPIC(string const &rawCmd);
+		void				treatMODE();
+		void				treatPRIVMSG_NOTICE();
 };
-
-#endif

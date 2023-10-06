@@ -1,41 +1,47 @@
-#ifndef REPLYCODES_HPP
-#define REPLYCODES_HPP
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ReplyCodes.hpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 20:27:12 by mahautlatin       #+#    #+#             */
+/*   Updated: 2023/10/06 20:29:23 by mahautlatin      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//// NUM REPLIES ////
+#pragma once
 
-#define RPL_WELCOME		1
-#define RPL_YOURHOST	2
-#define RPL_CREATED		3
-#define RPL_MYINFO		4
+#define RPL_WELCOME		        1
+#define RPL_YOURHOST	        2
+#define RPL_CREATED		        3
+#define RPL_MYINFO		        4
 
-#define RPL_UMODEIS		221
-#define RPL_ADMINME		256
-#define RPL_ADMINLOC1	257
-#define RPL_ADMINLOC2	258
-#define RPL_ADMINEMAIL	259
+#define RPL_UMODEIS		        221
+#define RPL_ADMINME		        256
+#define RPL_ADMINLOC1	        257
+#define RPL_ADMINLOC2	        258
+#define RPL_ADMINEMAIL	        259
 
-#define RPL_AWAY			301
-#define RPL_UNAWAY			305
-#define RPL_NOWAWAY			306
-#define RPL_ENDOFWHO		315
-#define RPL_LIST			322
-#define RPL_LISTEND			323
-#define RPL_CHANNELMODEIS	324
-#define RPL_NOTOPIC			331
-#define RPL_TOPIC			332
-#define RPL_INVITING		341
-#define RPL_VERSION			351
-#define RPL_WHOREPLY		352
-#define RPL_NAMREPLY		353
-#define RPL_ENDOFNAMES		366
-#define RPL_MOTDSTART		375
-#define RPL_MOTD			372
-#define RPL_ENDOFMOTD		376
-#define RPL_YOUREOPER		381
-#define RPL_TIME			391
-
-
-//// NUM ERRORS ////
+#define RPL_AWAY			    301
+#define RPL_UNAWAY			    305
+#define RPL_NOWAWAY			    306
+#define RPL_ENDOFWHO		    315
+#define RPL_LIST			    322
+#define RPL_LISTEND			    323
+#define RPL_CHANNELMODEIS	    324
+#define RPL_NOTOPIC			    331
+#define RPL_TOPIC			    332
+#define RPL_INVITING		    341
+#define RPL_VERSION			    351
+#define RPL_WHOREPLY		    352
+#define RPL_NAMREPLY		    353
+#define RPL_ENDOFNAMES		    366
+#define RPL_MOTDSTART		    375
+#define RPL_MOTD			    372
+#define RPL_ENDOFMOTD		    376
+#define RPL_YOUREOPER		    381
+#define RPL_TIME			    391
 
 #define ERR_NOSUCHNICK			401
 #define ERR_NOSUCHCHANNEL		403
@@ -66,5 +72,3 @@
 #define ERR_USERSDONTMATCH		502
 
 #define ERR_CUST_CMODEPARAM		696
-
-#endif

@@ -1,9 +1,17 @@
-#ifndef HEADERS_HPP
-#define HEADERS_HPP
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Headers.hpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/06 20:26:57 by mahautlatin       #+#    #+#             */
+/*   Updated: 2023/10/06 20:27:04 by mahautlatin      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*
-** C++ headers
-*/
+#pragma once
+
 #include <vector>
 #include <map>
 #include <set>
@@ -18,9 +26,6 @@
 #include <sstream>
 #include <exception>
 
-/*
-** Server Workflow & C librairies
-*/
 #include <netdb.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -37,5 +42,3 @@
 #include "Colors.hpp"
 #include "Commons.hpp"
 #include "ReplyCodes.hpp"
-
-#endif
