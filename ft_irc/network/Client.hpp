@@ -6,12 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:55:49 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 19:57:57 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/11 18:22:43 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_HPP
-#define CLIENT_HPP
+#pragma once
 
 #include "../includes/Headers.hpp"
 
@@ -25,7 +24,19 @@ class	Client
 
 	private:
 		Client(void);
+		// Functions implemented here were added just to respect the canonical convention
+		Client(Client const &src): _fd(src._fd)
+		{
+			*this = src;
+			return ;
+		};
+
 		Client(int fd);
+		Client &operator=(Client const &rhs)
+		{
+			(void)rhs;
+			return *this;
+		}
 
 		char		_buffer[BUFFER_SIZE + 1];
 		int const	_fd;
@@ -33,5 +44,3 @@ class	Client
 		bool		receiveCommand(string &cmd);
 		void		sendResponse(string const &resp);
 };
-
-#endif

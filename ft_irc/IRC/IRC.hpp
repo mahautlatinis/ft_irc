@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:09:48 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 21:09:23 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/11 18:19:06 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@
 
 class	IRC
 {
-	public:
-		IRC(string const &password);
-		virtual ~IRC(void);
-
-		User						*getUserByNick(string const &nick) const;
-		Channel						*getChannelByName(string const &name) const;
-		bool						processClientCommand(t_clientCmd const &command, std::vector<t_clientCmd> &responseQueue);
-		void						clientDisconnect(int fd);
-		int							getVictim();
-
 	private:
 		time_t const				_startupTime;	// Start-up time
 		string const				_svPassword;	// Server's password
@@ -39,21 +29,19 @@ class	IRC
 		int							_killing;		// FD of user being killed by an operator
 		Bot							*_bot;			// Server's bot
 
-		void						userLeaveChannel(User *user, Channel *chan);
-		void						removeFromAllChannel(User *user);
-		void						sendWelcomeMessage(User *user, std::vector<t_clientCmd> &responseQueue);
-
 		Channel						*newChannel(string const &name, User *creator);
 		std::set<User *>			getCommonUsers(User *user) const;
 
-		void						unknownCmd(Command const &cmd, std::vector<t_clientCmd> &responseQueue) const;
+		
 		bool						passwordNotOK(User *user, std::vector<t_clientCmd> &responseQueue);
+
 		string						getNoticeMsg(string const &senderPrefix, User *user, string const &msg) const;
 		string						getErrorResponse(User *user, string const &msg) const;
 		string						getResponseFromCode(User *user, int code, string params[]) const;
 		string						appendUserNotif(User *user, string params[], std::set<User *> const &dest, std::vector<t_clientCmd> &responseQueue, bool excludeUser=false) const;
-		void						pushToQueue(int fd, string const &msg, std::vector<t_clientCmd> &responseQueue) const;
 
+		void						unknownCmd(Command const &cmd, std::vector<t_clientCmd> &responseQueue) const;
+		void						pushToQueue(int fd, string const &msg, std::vector<t_clientCmd> &responseQueue) const;
 
 		void						execCmd(Command const &cmd, std::vector<t_clientCmd> &responseQueue);
 		void						admin(Command const &cmd, std::vector<t_clientCmd> &responseQueue);
@@ -87,8 +75,34 @@ class	IRC
 		void						chanMode(User *user, string const &chanName, string const &modes, string const &params, std::vector<t_clientCmd> &responseQueue);
 		void						userMode(User *user, string const &nick, string const &modes, std::vector<t_clientCmd> &responseQueue);
 
-		string						kickTarget(User *user, string const &nick, Channel *chan, string const &comment, std::vector<t_clientCmd> &responseQueue);
-
 		void						chanWho(User *user, string const &mask, bool o, std::vector<t_clientCmd> &responseQueue) const;
 		void						userWho(User *user, string mask, bool o, std::vector<t_clientCmd> &responseQueue) const;
+
+		void						userLeaveChannel(User *user, Channel *chan);
+		void						removeFromAllChannel(User *user);
+		void						sendWelcomeMessage(User *user, std::vector<t_clientCmd> &responseQueue);
+
+		string						kickTarget(User *user, string const &nick, Channel *chan, string const &comment, std::vector<t_clientCmd> &responseQueue);
+
+	public:
+		// Functions implemented here were added just to respect the canonical convention
+		IRC(void): _startupTime(::time(NULL)), _svPassword("password"), _prefix(string(":") + IRC_HOST), _killing(-1){ return ;};
+		IRC(string const &password);
+		IRC(IRC const &src): _startupTime(::time(NULL))
+		{
+			*this = src;
+			return ;
+		};
+		virtual ~IRC(void);
+		IRC &operator=(IRC const &rhs)
+		{
+			(void)rhs;
+			return (*this); 
+		};
+
+		User						*getUserByNick(string const &nick) const;
+		Channel						*getChannelByName(string const &name) const;
+		bool						processClientCommand(t_clientCmd const &command, std::vector<t_clientCmd> &responseQueue);
+		void						clientDisconnect(int fd);
+		int							getVictim(void);
 };

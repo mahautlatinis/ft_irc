@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:09:16 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 20:19:03 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/11 18:32:51 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 
 User::User(int fd):
 	_fd(fd),
-	_passwordOK(false),
-	_registered(false),
+	_passwordOK(true),
+	_registered(true),
+	_invisible(false),
+	_oper(false),
+	_bot(false),
 	_nick(DEFAULT_NAME),
 	_uname(DEFAULT_NAME),
 	_rname(DEFAULT_NAME),
-	_invisible(false),
-	_oper(false),
-	_bot(false)
+	_prefix(string(":") + DEFAULT_NAME + '!' + DEFAULT_NAME + '@' + USR_HOST),
+	_awayMsg("")
 {
 	return ;
 }
@@ -31,12 +33,13 @@ User::User(int fd, string const &botNick):
 	_fd(fd),
 	_passwordOK(true),
 	_registered(true),
+	_invisible(false),
+	_oper(false),
+	_bot(true),
 	_nick(botNick),
 	_uname(botNick),
 	_rname(botNick),
-	_invisible(false),
-	_oper(false),
-	_bot(true)
+	_awayMsg("")
 {
 	return ;
 }
