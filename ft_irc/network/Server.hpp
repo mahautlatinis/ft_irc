@@ -6,12 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:02:45 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 20:03:45 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/11 18:27:36 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERVER_HPP
-#define SERVER_HPP
+#pragma once
 
 #include "../includes/Headers.hpp"
 #include "../IRC/IRC.hpp"
@@ -38,10 +37,20 @@ class	Server
 		void					recvProcessCommand(int totalFD, std::vector<t_clientCmd> &responseQueue, std::set<int> &disconnectList);
 
 	public:
+		// Canonical form can't be respected here because of the reference to IRC
 		Server(int port, string const &password, IRC &irc);
 		virtual ~Server();
+		Server(Server const &src): _port(src._port), _password(src._password), _irc(src._irc), _fd(src._fd), _clients(src._clients), _maxFD(src._maxFD), _fdReader(src._fdReader)
+		{
+			*this = src;
+			return ;
+		};
+		Server &operator=(Server const &rhs)
+		{
+			(void)rhs;
+			return *this;
+		}
+		
 		void					setUp();
 		void					run();
 };
-
-#endif

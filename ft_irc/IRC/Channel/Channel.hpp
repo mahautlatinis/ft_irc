@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:53:19 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 20:29:55 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/11 18:05:27 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,41 @@ class	Channel
 		std::set<User *>	_invitations;		// List of users being invited
 
 	public:
-		Channel(string const &name, User *creator);
+		// Functions implemented here were added just to respect the canonical convention
+		Channel(void): _name("default"), _invitationOnly(false), _anyoneCanSetTopic(false)
+		{
+			return ; 
+		};
+
+		Channel(Channel const &src)
+		{
+			*this = src;
+		};
+
 		virtual ~Channel(void);
+		Channel(string const &name, User *creator);
+
+		Channel &operator=(Channel const &rhs)
+		{
+			(void)rhs;
+			return (*this); 
+		};
+
+		int					tryAddUser(User *user, string const &key);
+		int					removeUser(User *user);
+		int					trySetMode(IRC *irc, bool plus, char mode, string const &param);
+		int					getVisibleUsers() const;
+
+		bool				isOperator(User *user) const;
+		bool				hasJoined(User *user) const;
+		bool				hasKey() const;
+		bool				isInvited(User *user) const;
 
 		static bool			isPrefix(char c);
 		static bool			isNameLegal(string const &name);
 		static bool			modeNeedsParam(char mode, string &errorName);
 
-		int					tryAddUser(User *user, string const &key);
-		int					removeUser(User *user);
-		int					trySetMode(IRC *irc, bool plus, char mode, string const &param);
-		bool				isOperator(User *user) const;
-		bool				hasJoined(User *user) const;
-		bool				hasKey() const;
-		bool				isInvited(User *user) const;
 		string				getModes() const;
-		int					getVisibleUsers() const;
 
 		friend class IRC;
 };
