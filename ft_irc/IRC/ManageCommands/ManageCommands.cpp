@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:19:48 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:17:57 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 11:00:16 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,17 @@ void	IRC::unknownCmd(Command const &cmd,
 bool	IRC::passwordNotOK(User *user,
 	std::vector<t_clientCmd> &responseQueue)
 {
-	std::string	resp(getErrorResponse(user, "Access denied by configuration"));
+	std::string	resp(getErrorResponse(user, 
+		"Access denied by configuration"));
 	pushToQueue(user->_fd, resp, responseQueue);
 	clientDisconnect(user->_fd);
 	return true;
 }
 
 std::string	IRC::getNoticeMsg
-	(std::string const &senderPrefix, User *user, std::string const &msg) const
+	(std::string const &senderPrefix,
+		User *user,
+		std::string const &msg) const
 {
 	return std::string(
 		senderPrefix + " NOTICE "
@@ -42,7 +45,8 @@ std::string	IRC::getNoticeMsg
 	); 
 }
 
-std::string	IRC::getErrorResponse(User *user, std::string const &msg) const
+std::string	IRC::getErrorResponse(User *user,
+	std::string const &msg) const
 {
 	return std::string(
 		"ERROR :Closing link: ("

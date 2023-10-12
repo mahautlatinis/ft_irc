@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:53:31 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:41:12 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:55:30 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
 class	Command
 {
 	private:
-		User				*_user;
-		std::string			_type;
+		User						*_user;
+		std::string					_type;
 		std::vector<std::string>	_params;
 
-		void				buildParams(std::string const &strParams);
-		void				deduceType(std::string &cmd);
-		void				treatTOPIC(std::string const &rawCmd);
-		void				treatMODE(void);
-		void				treatPRIVMSG_NOTICE(void);
+		void						buildParams(std::string const &strParams);
+		void						deduceType(std::string &cmd);
+		void						treatTOPIC(std::string const &rawCmd);
+		void						treatMODE(void);
+		void						treatPRIVMSG_NOTICE(void);
 		
 	public:
 		// Functions implemented here were added just to respect the canonical convention

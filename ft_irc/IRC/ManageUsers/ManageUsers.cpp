@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:50:09 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:51:22 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 11:00:40 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	IRC::removeFromAllChannel(User *user)
 	return ;
 }
 
-void	IRC::sendWelcomeMessage(User *user, std::vector<t_clientCmd> &responseQueue)
+void	IRC::sendWelcomeMessage(User *user,
+	std::vector<t_clientCmd> &responseQueue)
 {
 	std::string	resp(
 		  getResponseFromCode(user, RPL_WELCOME, (std::string[]){ user->_prefix })

@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:01 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:46:02 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:59:22 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	IRC::chanPrivmsg
 	return ;
 }
 
-void	IRC::privmsg(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
+void	IRC::privmsg(Command const &cmd,
+			std::vector<t_clientCmd> &responseQueue)
 {
 	User		*user(cmd._user);
 	std::string	resp;

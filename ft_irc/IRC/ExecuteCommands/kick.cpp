@@ -6,15 +6,18 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:33:23 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:15:36 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:57:18 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../IRC.hpp"
 
 std::string	IRC::kickTarget
-	(User *user, std::string const &nick, Channel *chan, std::string const &comment,
-	std::vector<t_clientCmd> &responseQueue)
+	(User *user,
+		std::string const			&nick,
+		Channel 					*chan,
+		std::string const 			&comment,
+		std::vector<t_clientCmd>	&responseQueue)
 {
 	User		*target(getUserByNick(nick));
 	std::string	resp;
@@ -45,7 +48,8 @@ std::string	IRC::kickTarget
 	return resp;
 }
 
-void	IRC::kick(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
+void	IRC::kick(Command const &cmd,
+			std::vector<t_clientCmd> &responseQueue)
 {
 	std::string const			&chanName(cmd._params[0]);
 	Channel						*chan(getChannelByName(chanName));
@@ -61,7 +65,6 @@ void	IRC::kick(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 		pushToQueue(user->_fd, resp, responseQueue);
 		return ;
 	}
-
 	if (!chan)
 		resp = getResponseFromCode(user,
 			ERR_NOSUCHCHANNEL, (std::string[]){ chanName });

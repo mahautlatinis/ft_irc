@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:33:03 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:33:10 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:56:32 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	IRC::join(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 
 		if (res > 0)
 		{
-			resp = getResponseFromCode(user, res, (std::string[]){ name });
+			resp = getResponseFromCode(user,
+				res, (std::string[]){ name });
 			pushToQueue(user->_fd, resp, responseQueue);
 		}
 		else if (!res)

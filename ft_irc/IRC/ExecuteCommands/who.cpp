@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:14:57 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:14:55 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:59:46 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ void	IRC::who(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 
 	if (cmd._params.empty())
 	{
-		resp = getResponseFromCode(user, ERR_NEEDMOREPARAMS, (std::string[]){ cmd._type });
+		resp = getResponseFromCode(user,
+			ERR_NEEDMOREPARAMS, (std::string[]){ cmd._type });
 		pushToQueue(user->_fd, resp, responseQueue);
 		return ;
 	}
