@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:21:34 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 12:20:30 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 12:52:14 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,15 @@ std::string	IRC::getResponseFromCode(User *user, int code,
 			ss << comma << "Your host is " << IRC_HOST << ", running version "
 				<< IRC_VER; break;
 		case RPL_CREATED:
-			ss  << comma << "This server was created " << ctime(&_startupTime);
-			ss.seekp(-1, std::ios_base::end); break;
+			if (!__APPLE__)
+			{
+				ss  << comma << "This server was created " << ctime(&_startupTime);
+				ss.seekp(-1, std::ios_base::end); break;
+			}	
 		case RPL_MYINFO:
-			ss  << IRC_HOST << ' ' << IRC_VER << ' ' << "biklmnopstv " << comma
-				<< CHAN_VALID_MODES; break;
+			if (!__APPLE__)
+				ss  << IRC_HOST << ' ' << IRC_VER << ' ' << "biklmnopstv " << comma
+					<< CHAN_VALID_MODES; break;
 		case RPL_UMODEIS:
 			ss  << comma << params[0]; break;
 		case RPL_ADMINME:
@@ -103,7 +107,8 @@ std::string	IRC::getResponseFromCode(User *user, int code,
 		case RPL_MOTD:
 			ss  << comma << " " << params[0]; break;
 		case RPL_ENDOFMOTD:
-			ss  << comma << "End of message of the day."; break;
+			if (!__APPLE__)
+				ss  << comma << "End of message of the day."; break;
 		case RPL_YOUREOPER:
 			ss  << comma << "You are now an IRC operator"; break;
 		case RPL_TIME:
@@ -173,6 +178,15 @@ std::string	IRC::getResponseFromCode(User *user, int code,
 			break;
 		default: break;
 	}
-	ss << CMD_DELIM;
+	// For debug purposes
+	// std::cout << "Code is : " << code << std::endl;
+	if (!__APPLE__)
+		ss << CMD_DELIM;
+	else
+	{
+		if (code != RPL_CREATED && code != RPL_MYINFO
+				&& code != ERR_UNKNOWNCOMMAND)
+			ss << CMD_DELIM;
+	}
 	return ss.str();
 }
