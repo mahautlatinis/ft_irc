@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:53:19 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:28:51 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:51:29 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ class	Channel
 		std::string			getModes(void) const;
 
 		friend class IRC;
+
 };

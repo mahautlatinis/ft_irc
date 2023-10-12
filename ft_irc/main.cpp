@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 19:24:27 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:11:46 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:49:04 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ int	main(int ac, char **av)
 	if (!checkArgs(ac, av, port, password))
 		exit(0);
 
+	// IRC	*
 	gIRC = new IRC(password);
+	//Server	*
 	gServer = new Server(port, password, *gIRC);
 	gServer->setUp();
 	gServer->run();

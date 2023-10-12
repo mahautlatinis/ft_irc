@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:02:45 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:10:29 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:48:36 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ class	Server
 			*this = src;
 			return ;
 		};
+		
 		Server &operator=(Server const &rhs)
 		{
 			(void)rhs;
