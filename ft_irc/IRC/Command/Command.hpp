@@ -35,7 +35,6 @@ class	Command
 			*this = src;
 			return ;
 		};
-		
 		Command(User *user, std::string const &cmd);
 		virtual ~Command(void);
 		Command &operator=(Command const &rhs)

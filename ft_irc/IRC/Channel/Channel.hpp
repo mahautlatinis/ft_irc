@@ -58,7 +58,6 @@ class	Channel
 		int					removeUser(User *user);
 		int					tryAddUser(User *user, std::string const &key);
 		int					trySetMode(IRC *irc, bool plus, char mode, std::string const &param);
-
 		bool				hasJoined(User *user) const;
 		bool				hasKey(void) const;
 		bool				isInvited(User *user) const;

@@ -38,7 +38,6 @@ class Bot: public User
 			(void)rhs;
 			return *this;
 		}
-
 		std::string	getWelcomeMsg(std::string const &nick);
 
 		friend class IRC;

@@ -53,7 +53,6 @@ class	User
 			(void)rhs;
 			return *this;
 		}
-
 		static bool						checkNickValidChars(std::string const &nick);
 
 		bool							isUsernameDefault(void) const;
