@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:19:48 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 11:00:16 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 12:45:15 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	IRC::pushToQueue(int fd, std::string const &msg,
 	ss << msg << CMD_DELIM;
 
 	// For debug purposes
-	// std::cout << ss.str() << std::endl;
+	std::cout << ss.str() << std::endl;
 	responseQueue.push_back(std::make_pair(fd, msg));
 	return ;
 }
