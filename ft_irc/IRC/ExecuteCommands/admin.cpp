@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:26:38 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:30:55 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:55:48 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ class	AdminInfo
 		std::string	location;
 		std::string	email;
 
-		AdminInfo(): name(ADMIN_NAME), location(ADMIN_LOC), email(ADMIN_EMAIL)
+		AdminInfo(): 
+			name(ADMIN_NAME),
+			location(ADMIN_LOC),
+			email(ADMIN_EMAIL)
 		{
 			return ;
 		}
@@ -33,7 +36,8 @@ class	AdminInfo
 
 static AdminInfo	administrator;
 
-void	IRC::admin(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
+void	IRC::admin(Command const &cmd, 
+			std::vector<t_clientCmd> &responseQueue)
 {
 	User	*user(cmd._user);
 

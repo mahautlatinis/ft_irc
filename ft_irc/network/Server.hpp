@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:02:45 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:48:36 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 11:04:08 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ class	Server
 		void					acceptClient();
 		void					removeClient(int fd);
 		int						setFDForReading();
-		void					recvProcessCommand(int totalFD, std::vector<t_clientCmd> &responseQueue, std::set<int> &disconnectList);
+		void					recvProcessCommand(int totalFD, 
+									std::vector<t_clientCmd> &responseQueue, 
+									std::set<int> &disconnectList);
 
 	public:
 		// Canonical form can't be respected here because of the reference to IRC

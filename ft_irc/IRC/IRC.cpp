@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:56:21 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:38:41 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 11:04:13 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ IRC::IRC(std::string const &password):
 
 IRC::~IRC(void)
 {
-	std::map<int, User *>::iterator			iuit;
+	std::map<int, User *>::iterator				iuit;
 	std::map<std::string, Channel *>::iterator	scit;
 
 	for (iuit = _users.begin(); iuit != _users.end(); ++iuit)

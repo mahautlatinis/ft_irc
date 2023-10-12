@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:18:14 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:41:47 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:54:11 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,10 @@ int	Channel::removeUser(User *user)
 	return _users.size();
 }
 
-int	Channel::trySetMode(IRC *irc, bool plus, char mode, std::string const &param)
+int	Channel::trySetMode(IRC *irc, 
+	bool plus,
+	char mode,
+	std::string const &param)
 {
 	static std::string	allModes(CHAN_ALL_MODES);
 	static std::string	validModes(CHAN_VALID_MODES);

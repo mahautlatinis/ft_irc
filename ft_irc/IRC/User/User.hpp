@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:11:25 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:40:43 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 11:04:15 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ class	User
 
 		std::string						getModes(void) const;
 
-		int								tryJoin(Channel *chan, std::string const &key);
+		int								tryJoin(Channel *chan,
+											std::string const &key);
+
 		int								trySetMode(bool plus, char mode);
 
 		friend class					IRC;

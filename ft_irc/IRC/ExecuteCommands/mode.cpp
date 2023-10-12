@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:39:52 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:38:57 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:58:13 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,11 @@ void	IRC::userMode
 }
 
 void	IRC::chanMode
-	(User *user, std::string const &chanName, std::string const &modes,
-		std::string const &params, std::vector<t_clientCmd> &responseQueue)
+	(User *user, 
+		std::string const &chanName, 
+		std::string const &modes,
+		std::string const &params,
+		std::vector<t_clientCmd> &responseQueue)
 {
 	Channel						*chan(getChannelByName(chanName));
 	size_t						paramIdx(0);
@@ -155,7 +158,8 @@ void	IRC::chanMode
 	return ;
 }
 
-void	IRC::mode(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
+void	IRC::mode(Command const &cmd,
+			std::vector<t_clientCmd> &responseQueue)
 {
 	User				*user(cmd._user);
 	std::string const	&name(cmd._params[0]);

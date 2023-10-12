@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:09:48 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:39:49 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 11:02:59 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ class	IRC
 		int									_killing;
 		Bot									*_bot;
 
-		Channel								*newChannel(std::string const &name, User *creator);
+		Channel								*newChannel(std::string const &name,
+												User *creator);
 		
 		std::set<User *>					getCommonUsers(User *user) const;
 
@@ -146,40 +147,40 @@ class	IRC
 												std::string const &msg,
 												std::vector<t_clientCmd> &responseQueue);
 
-		void									chanMode(User *user,
-													std::string const &chanName,
-													std::string const &modes,
-													std::string const &params,
-													std::vector<t_clientCmd> &responseQueue);
+		void								chanMode(User *user,
+												std::string const &chanName,
+												std::string const &modes,
+												std::string const &params,
+												std::vector<t_clientCmd> &responseQueue);
 	
-		void									userMode(User *user, 
-													std::string const &nick,
-													std::string const &modes,
-													std::vector<t_clientCmd> &responseQueue);
+		void								userMode(User *user, 
+												std::string const &nick,
+												std::string const &modes,
+												std::vector<t_clientCmd> &responseQueue);
 
-		void									chanWho(User *user, 
-													std::string const &mask,
-													bool o,
-													std::vector<t_clientCmd> &responseQueue) const;
+		void								chanWho(User *user, 
+												std::string const &mask,
+												bool o,
+												std::vector<t_clientCmd> &responseQueue) const;
 
-		void									userWho(User *user,
-													std::string mask,
-													bool o,
-													std::vector<t_clientCmd> &responseQueue) const;
+		void								userWho(User *user,
+												std::string mask,
+												bool o,
+												std::vector<t_clientCmd> &responseQueue) const;
 
-		void									userLeaveChannel(User *user,
-													Channel *chan);
+		void								userLeaveChannel(User *user,
+												Channel *chan);
 
-		void									removeFromAllChannel(User *user);
+		void								removeFromAllChannel(User *user);
 
-		void									sendWelcomeMessage(User *user,
-													std::vector<t_clientCmd> &responseQueue);
+		void								sendWelcomeMessage(User *user,
+												std::vector<t_clientCmd> &responseQueue);
 
-		std::string								kickTarget(User *user,
-													std::string const &nick,
-													Channel *chan,
-													std::string const &comment,
-													std::vector<t_clientCmd> &responseQueue);
+		std::string							kickTarget(User *user,
+												std::string const &nick,
+												Channel *chan,
+												std::string const &comment,
+												std::vector<t_clientCmd> &responseQueue);
 
 	public:
 		// Functions implemented here were added just to respect the canonical convention
@@ -210,8 +211,10 @@ class	IRC
 
 		User									*getUserByNick(std::string const &nick) const;
 		Channel									*getChannelByName(std::string const &name) const;
+
 		bool									processClientCommand(t_clientCmd const &command,
 													std::vector<t_clientCmd> &responseQueue);
+
 		void									clientDisconnect(int fd);
 		int										getVictim(void);
 };

@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:30:28 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:32:21 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:56:20 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	IRC::invite(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {
-	User			*user(cmd._user);
+	std::string const	&chanName(cmd._params[1]);
+	Channel				*chan(getChannelByName(chanName));
 	std::string			resp;
 	std::string const	&nick(cmd._params[0]);
-	std::string const	&chanName(cmd._params[1]);
-	User			*target(getUserByNick(nick));
-	Channel			*chan(getChannelByName(chanName));
+	User				*target(getUserByNick(nick));
+	User				*user(cmd._user);
 
 	if (cmd._params.size() < 2)
 	{

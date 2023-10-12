@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:02:24 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:01:00 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:59:07 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	IRC::ping(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {
 	std::stringstream	ss;
-	std::string			param	= cmd._params.empty()
+	std::string			param = cmd._params.empty()
 							? ""
 							: cmd._params[0];
 

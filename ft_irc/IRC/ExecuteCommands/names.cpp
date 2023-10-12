@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:50:42 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:39:58 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:58:35 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	IRC::names(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 			);
 		}
 	}
-	resp += getResponseFromCode(user, RPL_ENDOFNAMES, (std::string[]){ name });
+	resp += getResponseFromCode(user,
+		RPL_ENDOFNAMES, (std::string[]){ name });
 	pushToQueue(user->_fd, resp, responseQueue);
 	return ;
 }
