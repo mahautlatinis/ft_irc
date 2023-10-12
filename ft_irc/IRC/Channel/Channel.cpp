@@ -6,40 +6,40 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:18:14 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/11 18:03:02 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:27:45 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Channel.hpp"
 #include "../IRC.hpp"
 
-Channel::Channel(string const &name, User *creator) :
-	_name(name),
+Channel::Channel(std::string const &name, User *creator):
+	_anyoneCanSetTopic(false),
 	_invitationOnly(false),
-	_anyoneCanSetTopic(false)
+	_name(name)
 {
 	_operators.insert(creator);
 	_users.insert(creator);
 }
 
-Channel::~Channel()
+Channel::~Channel(void)
 {
 	return ;
 }
 
 bool	Channel::isPrefix(char c)
 {
-	static string const	prefixSet(CHAN_PREFIX);
-	return (prefixSet.find(c) != string::npos);
+	static std::string const	prefixSet(CHAN_PREFIX);
+	return (prefixSet.find(c) != std::string::npos);
 }
 
-bool	Channel::isNameLegal(string const &name)
+bool	Channel::isNameLegal(std::string const &name)
 {
 	if (!isPrefix(name[0]))
 		return false;
 
-	static string const	illegalChars(CHAN_ILLEGAL_CHARS);
-	static std::set<char> const	illegalCharSet(illegalChars.begin(),
+	static std::string const	illegalChars(CHAN_ILLEGAL_CHARS);
+	static std::set<char> const illegalCharSet(illegalChars.begin(),
 		illegalChars.end());
 
 	std::set<char>		nameCharSet(name.begin() + 1, name.end());
@@ -55,9 +55,9 @@ bool	Channel::isNameLegal(string const &name)
 	return std::distance(inter.begin(), it) == 0;
 }
 
-bool	Channel::modeNeedsParam(char mode, string &errorName)
+bool	Channel::modeNeedsParam(char mode, std::string &errorName)
 {
-	string	name;
+	std::string	name;
 	if (mode == 'k')
 		name = "key";
 	else if (mode == 'o')
@@ -70,7 +70,7 @@ bool	Channel::modeNeedsParam(char mode, string &errorName)
 	return false;
 }
 
-int	Channel::tryAddUser(User *user, string const &key)
+int	Channel::tryAddUser(User *user, std::string const &key)
 {
 	if (hasJoined(user))
 		return -1;
@@ -93,12 +93,12 @@ int	Channel::removeUser(User *user)
 	return _users.size();
 }
 
-int	Channel::trySetMode(IRC *irc, bool plus, char mode, string const &param)
+int	Channel::trySetMode(IRC *irc, bool plus, char mode, std::string const &param)
 {
-	static string	allModes(CHAN_ALL_MODES);
-	static string	validModes(CHAN_VALID_MODES);
+	static std::string	allModes(CHAN_ALL_MODES);
+	static std::string	validModes(CHAN_VALID_MODES);
 
-	if (allModes.find(mode) == string::npos)
+	if (allModes.find(mode) == std::string::npos)
 		return ERR_UNKNOWNMODE;
 
 	if (mode == 'i' && plus != _invitationOnly)
@@ -157,7 +157,7 @@ bool	Channel::isOperator(User *user)	const
 	return (_operators.find(user) != _operators.end());
 }
 
-bool	Channel::hasKey() const
+bool	Channel::hasKey(void) const
 { 
 	return !_key.empty();
 }
@@ -167,9 +167,9 @@ bool	Channel::isInvited(User *user) const
 	return (_invitations.find(user) != _invitations.end());
 }
 
-string	Channel::getModes() const
+std::string	Channel::getModes(void) const
 {
-	string	mode("+");
+	std::string	mode("+");
 
 	if (_invitationOnly)
 		mode += 'i';
@@ -180,7 +180,7 @@ string	Channel::getModes() const
 	return mode;
 }
 
-int		Channel::getVisibleUsers() const
+int		Channel::getVisibleUsers(void) const
 {
 	int	count(0);
 

@@ -6,18 +6,18 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:55:35 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 20:30:12 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:16:45 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Command.hpp"
 
-static std::set<string>	_cmdIgnored;
-static std::set<string>	_cmdAvail;
+static std::set<std::string>	_cmdIgnored;
+static std::set<std::string>	_cmdAvail;
 
-Command::Command(User *user, string const &cmd): _user(user)
+Command::Command(User *user, std::string const &cmd): _user(user)
 {
-	string	cmdCopy(cmd);
+	std::string	cmdCopy(cmd);
 
 	deduceType(cmdCopy);
 
@@ -123,11 +123,11 @@ void	Command::initCommandList()
 	return ;
 }
 
-void	Command::deduceType(string &cmd)
+void	Command::deduceType(std::string &cmd)
 {
 	size_t	i(cmd.find(' ', 0));
 
-	if (i == string::npos)
+	if (i == std::string::npos)
 	{
 		_type = cmd;
 		cmd = "";
@@ -141,14 +141,14 @@ void	Command::deduceType(string &cmd)
 	return ;
 }
 
-void	Command::buildParams(string const &strParams)
+void	Command::buildParams(std::string const &strParams)
 {
 	size_t	i(strParams.find(" :", 0));
 
-	if (i == string::npos)
+	if (i == std::string::npos)
 		i = strParams.size();
 
-	string beforeLast(strParams.substr(0, i));
+	std::string beforeLast(strParams.substr(0, i));
 	::strSplit(_params, beforeLast, " ");
 
 	i += 2;
@@ -158,9 +158,9 @@ void	Command::buildParams(string const &strParams)
 }
 
 
-void	Command::treatTOPIC(string const &rawCmd)
+void	Command::treatTOPIC(std::string const &rawCmd)
 {
-	if (rawCmd.find(" :", 0) != string::npos)
+	if (rawCmd.find(" :", 0) != std::string::npos)
 	{
 		if (_params.empty())
 			_params.push_back("*");
@@ -175,7 +175,7 @@ void	Command::treatMODE(void)
 	if (_params.size() < 3)
 		return;
 
-	string res(_params[2]);
+	std::string res(_params[2]);
 
 	for (size_t i(3); i < _params.size(); ++i)
 		res += " " + _params[i];
@@ -190,7 +190,7 @@ void	Command::treatPRIVMSG_NOTICE(void)
 	if (_params.size() < 2)
 		return ;
 
-	string res(_params[1]);
+	std::string res(_params[1]);
 
 	for (size_t i(2); i < _params.size(); ++i)
 		res += " " + _params[i];

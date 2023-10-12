@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:33:03 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 22:28:28 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:33:10 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	IRC::join(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {
-	User				*user(cmd._user);
-	string				resp;
-	std::vector<string>	chanNames, chanKeys;
+	User						*user(cmd._user);
+	std::string					resp;
+	std::vector<std::string>	chanNames, chanKeys;
 
 	if (cmd._params.empty())
 	{
-		resp = getResponseFromCode(user, ERR_NEEDMOREPARAMS, (string[]){ cmd._type });
+		resp = getResponseFromCode(user, 
+			ERR_NEEDMOREPARAMS, (std::string[]){ cmd._type });
 		pushToQueue(user->_fd, resp, responseQueue);
 		return ;
 	}
@@ -32,14 +33,15 @@ void	IRC::join(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 
 	for (size_t i(0); i < chanNames.size(); ++i)
 	{
-		string const	&name(chanNames[i]);
-		string const	&key = (i < chanKeys.size())
+		std::string const	&name(chanNames[i]);
+		std::string const	&key = (i < chanKeys.size())
 							 ? chanKeys[i]
 							 : "";
 
 		if (!Channel::isNameLegal(name))
 		{
-			resp = getResponseFromCode(user, ERR_BADCHANMASK, (string[]){ name });
+			resp = getResponseFromCode(user, 
+				ERR_BADCHANMASK, (std::string[]){ name });
 			pushToQueue(user->_fd, resp, responseQueue);
 			continue ;
 		}
@@ -54,14 +56,14 @@ void	IRC::join(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 
 		if (res > 0)
 		{
-			resp = getResponseFromCode(user, res, (string[]){ name });
+			resp = getResponseFromCode(user, res, (std::string[]){ name });
 			pushToQueue(user->_fd, resp, responseQueue);
 		}
 		else if (!res)
 		{
 			appendUserNotif(
 				user,
-				(string[]){ "JOIN", ":" + name, "" },
+				(std::string[]){ "JOIN", ":" + name, "" },
 				chan->_users,
 				responseQueue
 			);

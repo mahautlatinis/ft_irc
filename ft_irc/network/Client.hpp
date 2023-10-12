@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:55:49 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/11 18:22:43 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:57:20 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 class	Client
 {
 	public:
-		virtual ~Client();
+		virtual ~Client(void);
 		friend class Server;
 
 	private:
@@ -40,7 +40,7 @@ class	Client
 
 		char		_buffer[BUFFER_SIZE + 1];
 		int const	_fd;
-		string		_cmdBuilder;
-		bool		receiveCommand(string &cmd);
-		void		sendResponse(string const &resp);
+		std::string	_cmdBuilder;
+		bool		receiveCommand(std::string &cmd);
+		void		sendResponse(std::string const &resp);
 };

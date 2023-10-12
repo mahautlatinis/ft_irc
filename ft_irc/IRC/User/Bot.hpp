@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:08:20 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/11 18:13:12 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:29:10 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 class Bot: public User
 {
 	private:
-		string	processUserMsg(string const &msg);
-		string	cmdHELP();
-		string	cmdCALC(string const &expr);
-		string	cmdQUOTE();
-		string	getResponseFromPython(string const &botRequest);
+		std::string	cmdCALC(std::string const &expr);
+		std::string	cmdHELP(void);
+		std::string	cmdQUOTE(void);
+		std::string	getResponseFromPython(std::string const &botRequest);
+		std::string	processUserMsg(std::string const &msg);
 
 	public:
 		// Functions implemented here were added just to respect the canonical convention
@@ -39,7 +39,7 @@ class Bot: public User
 			return *this;
 		}
 
-		string	GetWelcomeMsg(string const &nick);
+		std::string	getWelcomeMsg(std::string const &nick);
 
 		friend class IRC;
 };

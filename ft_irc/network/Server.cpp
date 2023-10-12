@@ -6,17 +6,18 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:58:30 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 22:02:50 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:28:11 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Server.hpp"
 
-Server::Server(int port, string const &password, IRC &irc) :
+Server::Server(int port, std::string const &password, IRC &irc) :
+	_fd(-1),
 	_port(port),
-	_password(password),
 	_irc(irc),
-	_fd(-1)
+	_password(password)
+	
 {
 	return ;
 }
@@ -97,11 +98,11 @@ void	Server::removeClient(int fd)
 
 void	Server::run(void)
 {
-	int	totalFD;
-	std::vector<t_clientCmd>	responseQueue;
-	std::set<int>				disconnectList;
-	std::vector<t_clientCmd>::iterator	rIt;
+	int									totalFD;
+	std::set<int>						disconnectList;
 	std::set<int>::iterator				dIt;
+	std::vector<t_clientCmd>			responseQueue;
+	std::vector<t_clientCmd>::iterator	rIt;
 
 	while (true)
 	{
@@ -122,7 +123,7 @@ void	Server::run(void)
 	return ;
 }
 
-int	Server::setFDForReading()
+int	Server::setFDForReading(void)
 {
 	_maxFD = _fd;
 	FD_ZERO(&_fdReader);
@@ -146,7 +147,7 @@ int	Server::setFDForReading()
 void	Server::recvProcessCommand
 	(int totalFD, std::vector<t_clientCmd> &responseQueue, std::set<int> &disconnectList)
 {
-	string	cmd;
+	std::string	cmd;
 
 	for (int fd = 3; fd <= _maxFD && totalFD; ++fd)
 		if (FD_ISSET(fd, &_fdReader))

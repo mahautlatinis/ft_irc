@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 19:24:27 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 20:03:50 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:11:46 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	handleSignal(int signum)
 	exit(0);
 }
 
-static bool	checkArgs(int ac, char **av, int &port, string &password)
+static bool	checkArgs(int ac, char **av, int &port, std::string &password)
 {
 	int	iPort, iPassword;
 
@@ -53,7 +53,7 @@ static bool	checkArgs(int ac, char **av, int &port, string &password)
 		std::cerr << "Invalid port number" << std::endl;
 		return false;
 	}
-	password = string(av[iPassword]);
+	password = std::string(av[iPassword]);
 	return true;
 }
 
@@ -64,8 +64,8 @@ int	main(int ac, char **av)
 	signal(SIGINT, handleSignal);
 	signal(SIGQUIT, handleSignal);
 
-	int		port;
-	string	password;
+	int			port;
+	std::string	password;
 	if (!checkArgs(ac, av, port, password))
 		exit(0);
 

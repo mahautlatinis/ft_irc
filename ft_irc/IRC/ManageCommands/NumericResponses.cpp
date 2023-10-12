@@ -6,23 +6,23 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:21:34 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 23:12:37 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:01:09 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../IRC.hpp"
 
-static string	toStrZeroPadded(void)
+static std::string	toStrZeroPadded(void)
 {
-	char	buf[16];
-	string	res(buf);
+	char		buf[16];
+	std::string	res(buf);
 	return res;
 }
 
-string	IRC::getResponseFromCode(User *user, int code,
-	string params[]) const
+std::string	IRC::getResponseFromCode(User *user, int code,
+	std::string params[]) const
 {
-	stringstream	ss;
+	std::stringstream	ss;
 	std::string		comma;
 
 	comma = ":";

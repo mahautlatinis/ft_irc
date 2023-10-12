@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   OPER.cpp                                           :+:      :+:    :+:   */
+/*   oper.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:58:48 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 18:59:06 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:41:18 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 void	IRC::oper(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {
-	User	*user(cmd._user);
-	string	resp;
+	User		*user(cmd._user);
+	std::string	resp;
 
 	if (cmd._params.size() < 2)
-		resp = getResponseFromCode(user, ERR_NEEDMOREPARAMS, (string[]){ cmd._type });
+		resp = getResponseFromCode(user, 
+			ERR_NEEDMOREPARAMS, (std::string[]){ cmd._type });
 	else if (cmd._params[0] != OPER_USERNAME || cmd._params[1] != OPER_PASSWORD)
 		resp = getResponseFromCode(user, ERR_PASSWDMISMATCH, NULL);
 	else

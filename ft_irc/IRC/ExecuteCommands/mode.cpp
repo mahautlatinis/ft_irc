@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MODE.cpp                                           :+:      :+:    :+:   */
+/*   mode.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:39:52 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 21:02:28 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:38:57 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../IRC.hpp"
 
 void	IRC::userMode
-	(User *user, string const &nick, string const &modes, std::vector<t_clientCmd> &responseQueue)
+	(User *user, 
+		std::string const &nick, 
+		std::string const &modes, 
+		std::vector<t_clientCmd> &responseQueue)
 {
-	string	resp;
-	string	modeChanges;
+	std::string	resp;
+	std::string	modeChanges;
 
 	if (nick != user->_nick)
 		resp = getResponseFromCode(user, ERR_USERSDONTMATCH, NULL);
 	else if (modes.empty())
-		resp = getResponseFromCode(user, RPL_UMODEIS, (string[]){ user->getModes() });
+		resp = getResponseFromCode(user, 
+			RPL_UMODEIS, (std::string[]){ user->getModes() });
 
 	if (!resp.empty())
 	{
@@ -38,7 +42,8 @@ void	IRC::userMode
 		if (!res)
 			modeChanges += modes[i];
 		else if (res > 0)
-			resp += getResponseFromCode(user, res, (string[]){ modes.substr(i,1) });
+			resp += getResponseFromCode(user, res, 
+				(std::string[]){ modes.substr(i,1) });
 	}
 
 	if (!modeChanges.empty())
@@ -53,33 +58,35 @@ void	IRC::userMode
 }
 
 void	IRC::chanMode
-	(User *user, string const &chanName, string const &modes,
-		string const &params, std::vector<t_clientCmd> &responseQueue)
+	(User *user, std::string const &chanName, std::string const &modes,
+		std::string const &params, std::vector<t_clientCmd> &responseQueue)
 {
-	string				resp;
-	Channel				*chan(getChannelByName(chanName));
-	std::vector<string>	paramsList;
-	string				modeChanges;
-	std::vector<string>	paramChanges;
-	size_t				paramIdx(0);
-	string				param, errorName;
+	Channel						*chan(getChannelByName(chanName));
+	size_t						paramIdx(0);
+	std::string					modeChanges;
+	std::string					param, errorName;
+	std::string					resp;
+	std::vector<std::string>	paramChanges;
+	std::vector<std::string>	paramsList;
 
 	if (!chan)
-		resp = getResponseFromCode(user, ERR_NOSUCHCHANNEL, (string[]){ chanName });
+		resp = getResponseFromCode(user, ERR_NOSUCHCHANNEL,
+			(std::string[]){ chanName });
 	else if (modes.empty())
 	{
-		string	chanKey;
+		std::string	chanKey;
 		if (chan->hasKey())
 			chanKey = (chan->hasJoined(user))
 					? chan->_key
 					: "<key>";
 		resp = getResponseFromCode(
 			user, RPL_CHANNELMODEIS,
-			(string[]){ chanName, chan->getModes(), chanKey }
+			(std::string[]){ chanName, chan->getModes(), chanKey }
 		);
 	}
 	else if (!chan->isOperator(user))
-		resp = getResponseFromCode(user, ERR_CHANOPRIVSNEEDED, (string[]){ chanName });
+		resp = getResponseFromCode(user,
+			ERR_CHANOPRIVSNEEDED, (std::string[]){ chanName });
 
 	if (!resp.empty())
 	{
@@ -101,7 +108,7 @@ void	IRC::chanMode
 		{
 			resp += getResponseFromCode(
 				user, ERR_CUST_CMODEPARAM,
-				(string[]){ chanName, modes.substr(i, 1), errorName }
+				(std::string[]){ chanName, modes.substr(i, 1), errorName }
 			);
 			continue ;
 		}
@@ -111,7 +118,7 @@ void	IRC::chanMode
 		if (res > 0)
 			resp += getResponseFromCode(
 				user, res,
-				(string[]){ param, modes.substr(i, 1), chanName, errorName }
+				(std::string[]){ param, modes.substr(i, 1), chanName, errorName }
 			);
 		else if(!res)
 		{
@@ -128,20 +135,20 @@ void	IRC::chanMode
 		modeChanges = plus
 					? "+" + modeChanges
 					: "-" + modeChanges;
-		string	msgToAll;
+		std::string	msgToAll;
 		if (paramChanges.empty())
 			msgToAll += ":" + modeChanges;
 		else
 		{
 			msgToAll += modeChanges;
 			paramChanges.back() = ":" + paramChanges.back();
-			for (std::vector<string>::iterator it(paramChanges.begin());
+			for (std::vector<std::string>::iterator it(paramChanges.begin());
 				it != paramChanges.end(); ++it)
 				msgToAll += " " + (*it);
 		}
 		appendUserNotif(
 			user,
-			(string[]){ "MODE", chanName, msgToAll, "" },
+			(std::string[]){ "MODE", chanName, msgToAll, "" },
 			chan->_users, responseQueue
 		);
 	}
@@ -150,16 +157,17 @@ void	IRC::chanMode
 
 void	IRC::mode(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {
-	User			*user(cmd._user);
-	string const	&name(cmd._params[0]);
-	string const	&modes = (cmd._params.size() < 2)
+	User				*user(cmd._user);
+	std::string const	&name(cmd._params[0]);
+	std::string const	&modes = (cmd._params.size() < 2)
 						   ? "" : cmd._params[1];
-	string const	&params = (cmd._params.size() < 3)
+	std::string const	&params = (cmd._params.size() < 3)
 						   ? "" : cmd._params[2];
 
 	if (cmd._params.empty())
 	{
-		string resp(getResponseFromCode(user, ERR_NEEDMOREPARAMS, (string[]){ cmd._type }));
+		std::string resp(getResponseFromCode(user, 
+			ERR_NEEDMOREPARAMS, (std::string[]){ cmd._type }));
 		pushToQueue(user->_fd, resp, responseQueue);
 		return ;
 	}

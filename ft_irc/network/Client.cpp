@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:55:42 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 22:02:39 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:57:02 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ Client::~Client(void)
 	return ;
 }
 
-bool	Client::receiveCommand(string &cmd)
+bool	Client::receiveCommand(std::string &cmd)
 {
 	ssize_t	r(recv(_fd, _buffer, BUFFER_SIZE, 0));
 	if (r <= 0)
@@ -35,7 +35,7 @@ bool	Client::receiveCommand(string &cmd)
 
 	_cmdBuilder += _buffer;
 
-	if (_cmdBuilder.find(CMD_DELIM, _cmdBuilder.size() - LEN_DELIM) != string::npos)
+	if (_cmdBuilder.find(CMD_DELIM, _cmdBuilder.size() - LEN_DELIM) != std::string::npos)
 	{
 		cmd = _cmdBuilder;
 		_cmdBuilder.clear();
@@ -43,7 +43,7 @@ bool	Client::receiveCommand(string &cmd)
 	return true;
 }
 
-void	Client::sendResponse(string const &resp)
+void	Client::sendResponse(std::string const &resp)
 {
 	send(_fd, resp.c_str(), resp.size(), 0);
 	return ;

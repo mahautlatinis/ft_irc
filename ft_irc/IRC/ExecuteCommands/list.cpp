@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   LIST.cpp                                           :+:      :+:    :+:   */
+/*   list.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:57:05 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 18:57:08 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:00:49 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@
 
 void	IRC::list(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {
-	User    					*user(cmd._user);
-	string    					resp;
-	std::map<string, Channel *>	chans;
-	std::vector<string>			names;
-	stringstream				ss;
+	std::map<std::string, Channel *>		chans;
+	std::string    							resp;
+	std::vector<std::string>				names;
+	std::stringstream						ss;
+	User    								*user(cmd._user);
 
 	if (cmd._params.empty())
 		chans = _channels;
 	else
 	{
 		::strSplit(names, cmd._params[0], ",");
-		for (std::vector<string>::iterator it(names.begin());
+		for (std::vector<std::string>::iterator it(names.begin());
 			it != names.end(); ++it)
 		{
 			Channel	*chan(getChannelByName(*it));
@@ -37,7 +37,7 @@ void	IRC::list(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 		}
 	}
 
-	for (std::map<string, Channel *>::iterator it(chans.begin());
+	for (std::map<std::string, Channel *>::iterator it(chans.begin());
 		it != chans.end(); ++it)
 	{
 		int	numVisible(it->second->getVisibleUsers());
@@ -46,7 +46,7 @@ void	IRC::list(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 			ss << numVisible;
 			resp += getResponseFromCode(
 				user, RPL_LIST,
-				(string[]) {
+				(std::string[]) {
 					it->first,
 					ss.str(),
 					it->second->_topic

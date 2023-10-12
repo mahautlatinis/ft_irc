@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AWAY.cpp                                           :+:      :+:    :+:   */
+/*   away.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:26:34 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 18:27:03 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:31:06 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	IRC::away(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {
-	User	*user(cmd._user);
-	string	resp;
+	User		*user(cmd._user);
+	std::string	resp;
 
 	if (cmd._params.empty() || cmd._params[0].empty())
 	{

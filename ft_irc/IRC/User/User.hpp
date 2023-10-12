@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:11:25 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/11 18:28:36 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:22:53 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,18 @@
 class	User
 {
 	private:
-		int					_fd;			// fd of user's network client, used for unique identifier
-
-		bool				_passwordOK;	// Has user entered good password ?
-		bool				_registered;	// Is user registered ?
-		bool				_invisible;		// (i) Is invisible
-		bool				_oper;			// (o) Is server operator
-		bool				_bot;			// (B) Is a bot
-
-		string				_nick;			// Nickname
-		string				_uname;			// Username
-		string				_rname;			// Real name
-		string				_prefix;		// User's prefix in network messages
-		string				_awayMsg;		// (a) Away message
-
-		std::set<Channel *>	_joined;		// List of channels user has joined
+		bool						_bot;
+		bool						_invisible;
+		bool						_oper;
+		bool						_passwordOK;
+		bool						_registered;
+		int							_fd;
+		std::set<Channel *>			_joined;
+		std::string					_awayMsg;
+		std::string					_nick;
+		std::string					_prefix;
+		std::string					_rname;
+		std::string					_uname;
 		
 	public:
 		// Functions implemented here were added just to respect the canonical convention
@@ -57,23 +54,23 @@ class	User
 			return *this;
 		}
 
-		static bool			checkNickValidChars(string const &nick);
+		static bool						checkNickValidChars(std::string const &nick);
 
-		bool				isUsernameDefault() const;
-		bool				isAway() const;
-		bool				isVisible() const;
+		bool							isUsernameDefault(void) const;
+		bool							isAway(void) const;
+		bool							isVisible(void) const;
 
-		void				setNick(string const &nick);
-		void				setUsername(string const &uname);
+		void							setNick(std::string const &nick);
+		void							setUsername(std::string const &uname);
 
-		string				getModes() const;
+		std::string						getModes(void) const;
 
-		int					tryJoin(Channel *chan, string const &key);
-		int					trySetMode(bool plus, char mode);
+		int								tryJoin(Channel *chan, std::string const &key);
+		int								trySetMode(bool plus, char mode);
 
-		friend class		IRC;
+		friend class					IRC;
 
 	protected:
-		User(int fd, string const &botNick);
-		void				registrationOK();
+		User(int fd, std::string const	&botNick);
+		void							registrationOK();
 };

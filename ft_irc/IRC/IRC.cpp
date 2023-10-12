@@ -6,16 +6,16 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:56:21 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/11 18:19:49 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:29:15 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "IRC.hpp"
 
-IRC::IRC(string const &password):
+IRC::IRC(std::string const &password):
 	_startupTime(::time(NULL)),
 	_svPassword(password),
-	_prefix(string(":") + IRC_HOST),
+	_prefix(std::string(":") + IRC_HOST),
 	_killing(-1)
 {
 	Command::initCommandList();
@@ -28,7 +28,7 @@ IRC::IRC(string const &password):
 IRC::~IRC(void)
 {
 	std::map<int, User *>::iterator			iuit;
-	std::map<string, Channel *>::iterator	scit;
+	std::map<std::string, Channel *>::iterator	scit;
 
 	for (iuit = _users.begin(); iuit != _users.end(); ++iuit)
 		delete iuit->second;
@@ -42,9 +42,10 @@ IRC::~IRC(void)
 bool	IRC::processClientCommand(t_clientCmd const &command,
 	std::vector<t_clientCmd> &responseQueue)
 {
-	User				*user;
-	int					fd(command.first);
-	std::vector<string>	subCmds;
+	User						*user;
+	int							fd(command.first);
+	std::vector<std::string>	subCmds;
+	std::string					msg;
 
 	if (_users.find(fd) == _users.end())
 	{
@@ -52,9 +53,9 @@ bool	IRC::processClientCommand(t_clientCmd const &command,
 		if (_svPassword.empty())
 			user->_passwordOK = true;
 
-		string	msg = getNoticeMsg(
+		msg = getNoticeMsg(
 			_prefix, user,
-			string("*** Your hostname is set to ") + USR_HOST
+			std::string("*** Your hostname is set to ") + USR_HOST
 				+ " like everybody else."
 		);
 		pushToQueue(fd, getNoticeMsg(_prefix, user, msg), responseQueue);
@@ -64,7 +65,7 @@ bool	IRC::processClientCommand(t_clientCmd const &command,
 
 	::strSplit(subCmds, command.second, CMD_DELIM);
 
-	for (std::vector<string>::iterator it(subCmds.begin());
+	for (std::vector<std::string>::iterator it(subCmds.begin());
 		it != subCmds.end(); ++it)
 	{
 		Command	cmd(user, *it);
@@ -89,7 +90,7 @@ bool	IRC::processClientCommand(t_clientCmd const &command,
 				Command	botPRIVMSG(
 					_bot,
 					"PRIVMSG " + user->_nick + " :"
-						+ _bot->GetWelcomeMsg(user->_nick)
+						+ _bot->getWelcomeMsg(user->_nick)
 				);
 				privmsg(botPRIVMSG, responseQueue);
 			}

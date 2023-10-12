@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:09:16 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/11 18:32:51 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:26:26 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,32 @@
 #include "../Channel/Channel.hpp"
 
 User::User(int fd):
-	_fd(fd),
-	_passwordOK(true),
-	_registered(true),
+	_bot(false),
 	_invisible(false),
 	_oper(false),
-	_bot(false),
+	_passwordOK(true),
+	_registered(true),
+	_fd(fd),
+	_awayMsg(""),
 	_nick(DEFAULT_NAME),
-	_uname(DEFAULT_NAME),
+	_prefix(std::string(":") + DEFAULT_NAME + '!' + DEFAULT_NAME + '@' + USR_HOST),
 	_rname(DEFAULT_NAME),
-	_prefix(string(":") + DEFAULT_NAME + '!' + DEFAULT_NAME + '@' + USR_HOST),
-	_awayMsg("")
+	_uname(DEFAULT_NAME)
 {
 	return ;
 }
 
-User::User(int fd, string const &botNick):
-	_fd(fd),
-	_passwordOK(true),
-	_registered(true),
+User::User(int fd, std::string const &botNick):
+	_bot(true),
 	_invisible(false),
 	_oper(false),
-	_bot(true),
+	_passwordOK(true),
+	_registered(true),
+	_fd(fd),
+	_awayMsg(""),
 	_nick(botNick),
-	_uname(botNick),
 	_rname(botNick),
-	_awayMsg("")
+	_uname(botNick)
 {
 	return ;
 }
@@ -49,9 +49,9 @@ User::~User(void)
 	return ;
 }
 
-bool	User::checkNickValidChars(string const &nick)
+bool	User::checkNickValidChars(std::string const &nick)
 {
-	static string const			validChars(VALID_CHARS);
+	static std::string const	validChars(VALID_CHARS);
 	static std::set<char> const	validChatSet(validChars.begin(),
 		validChars.end());
 	std::set<char>				nickCharSet(nick.begin(), nick.end());
@@ -67,30 +67,30 @@ bool	User::checkNickValidChars(string const &nick)
 	return std::distance(diff.begin(), it) == 0;
 }
 
-void	User::registrationOK()
+void	User::registrationOK(void)
 {
 	_registered = true;
-	_prefix = string(":") + _nick + '!' + _uname + '@' + USR_HOST;
+	_prefix = std::string(":") + _nick + '!' + _uname + '@' + USR_HOST;
 	return ;
 }
 
 
-bool	User::isUsernameDefault() const
+bool	User::isUsernameDefault(void) const
 {
 	return (_uname == DEFAULT_NAME);
 }
 
-bool	User::isAway() const
+bool	User::isAway(void) const
 {
 	return (!_awayMsg.empty());
 }
 
-bool	User::isVisible() const
+bool	User::isVisible(void) const
 {
 	return !_invisible;
 }
 
-void	User::setNick(string const &nick)
+void	User::setNick(std::string const &nick)
 {
 	_nick = nick;
 	if (_uname != DEFAULT_NAME)
@@ -98,7 +98,7 @@ void	User::setNick(string const &nick)
 	return ;
 }
 
-void	User::setUsername(string const &uname)
+void	User::setUsername(std::string const &uname)
 {
 	_uname = uname;
 	if (_nick != DEFAULT_NAME)
@@ -106,9 +106,9 @@ void	User::setUsername(string const &uname)
 	return ;
 }
 
-string	User::getModes() const
+std::string	User::getModes() const
 {
-	string	mode("+");
+	std::string	mode("+");
 	if (isAway())
 		mode += "a";
 	if (_invisible)
@@ -120,7 +120,7 @@ string	User::getModes() const
 	return mode;
 }
 
-int	User::tryJoin(Channel *chan, string const &key)
+int	User::tryJoin(Channel *chan, std::string const &key)
 {
 	if (_joined.find(chan) != _joined.end())
 		return -1;
@@ -134,10 +134,10 @@ int	User::tryJoin(Channel *chan, string const &key)
 
 int	User::trySetMode(bool plus, char mode)
 {
-	static string	allModes(USR_ALL_MODES);
-	static string	validModes(USR_VALID_MODES);
+	static std::string	allModes(USR_ALL_MODES);
+	static std::string	validModes(USR_VALID_MODES);
 
-	if (allModes.find(mode) == string::npos)
+	if (allModes.find(mode) == std::string::npos)
 		return ERR_UMODEUNKNOWNFLAG;
 	if (mode == 'a' && !plus && isAway())
 	{

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   DIE.cpp                                            :+:      :+:    :+:   */
+/*   die.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:27:11 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 18:27:38 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:31:12 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	IRC::die(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 
 	if (!user->_oper)
 	{
-		string	resp(getResponseFromCode(user, ERR_NOPRIVILEGES, NULL));
+		std::string	resp(getResponseFromCode(user, ERR_NOPRIVILEGES, NULL));
 		pushToQueue(user->_fd, resp, responseQueue);
 		return;
 	}

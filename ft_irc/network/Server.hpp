@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:02:45 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/11 18:27:36 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 10:10:29 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@
 class	Server
 {
 	private:
-		int const				_port;		// Server's port
-		string	const			_password;	// Server's password
-		IRC						&_irc;		// IRC program
-		int						_fd;		// Server's socket fd
-
-		std::map<int, Client *>	_clients;	// List of clients, fd as key, Client object as value
-		int						_maxFD;		// Current highest client FD
-		fd_set					_fdReader;	// Structure to select client FD for reading
+		fd_set					_fdReader;
+		int						_fd;
+		int						_maxFD;
+		int const				_port;
+		IRC						&_irc;
+		std::map<int, Client *>	_clients;
+		std::string	const		_password;
 
 		void					acceptClient();
 		void					removeClient(int fd);
@@ -38,9 +37,16 @@ class	Server
 
 	public:
 		// Canonical form can't be respected here because of the reference to IRC
-		Server(int port, string const &password, IRC &irc);
-		virtual ~Server();
-		Server(Server const &src): _port(src._port), _password(src._password), _irc(src._irc), _fd(src._fd), _clients(src._clients), _maxFD(src._maxFD), _fdReader(src._fdReader)
+		Server(int port, std::string const &password, IRC &irc);
+		virtual ~Server(void);
+		Server(Server const &src):
+			_fdReader(src._fdReader),
+			_fd(src._fd),
+			_maxFD(src._maxFD),
+			_port(src._port),
+			_irc(src._irc),
+			_clients(src._clients),
+			_password(src._password)
 		{
 			*this = src;
 			return ;
@@ -51,6 +57,6 @@ class	Server
 			return *this;
 		}
 		
-		void					setUp();
-		void					run();
+		void					setUp(void);
+		void					run(void);
 };

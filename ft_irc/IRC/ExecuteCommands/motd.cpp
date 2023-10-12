@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MOTD.cpp                                           :+:      :+:    :+:   */
+/*   motd.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:54:56 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 20:51:33 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:39:28 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../IRC.hpp"
 #include <fstream>
 
-static std::vector<string>	MOTDLines;
-static bool					motdInit(false);
+static std::vector<std::string>	MOTDLines;
+static bool						motdInit(false);
 
 static void	initMotd()
 {
 	std::ifstream	motdFile(MOTD_FILE);
 	char			*cwd(getcwd(NULL, 0));
-	string			line;
+	std::string		line;
 
 	motdInit = true;
 	if (!motdFile.is_open())
@@ -39,8 +39,8 @@ static void	initMotd()
 
 void	IRC::motd(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {
-	string	motd;
-	User	*user(cmd._user);
+	std::string	motd;
+	User		*user(cmd._user);
 
 	if (!motdInit)
 		initMotd();
@@ -49,12 +49,12 @@ void	IRC::motd(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 	else
 	{
 		motd = getResponseFromCode(user, RPL_MOTDSTART, NULL);
-		for (std::vector<string>::iterator it(MOTDLines.begin());
+		for (std::vector<std::string>::iterator it(MOTDLines.begin());
 			it != MOTDLines.end(); ++it)
 		{
 			motd += getResponseFromCode(
 				user, RPL_MOTD,
-				(string[]){ *it }
+				(std::string[]){ *it }
 			);
 		}
 		motd += getResponseFromCode(user, RPL_ENDOFMOTD, NULL);

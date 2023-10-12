@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ManUser.cpp                                        :+:      :+:    :+:   */
+/*   ManageUsers.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:50:09 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 18:50:17 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:51:22 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../IRC.hpp"
 
-User	*IRC::getUserByNick(string const &nick) const
+User	*IRC::getUserByNick(std::string const &nick) const
 {
 	for (std::map<int, User *>::const_iterator it(_users.begin());
 		it != _users.end(); ++it)
@@ -34,10 +34,10 @@ void	IRC::userLeaveChannel(User *user, Channel *chan)
 
 void	IRC::removeFromAllChannel(User *user)
 {
-	std::map<string, Channel *>	chansCopy(_channels);
-	Channel						*chan;
+	std::map<std::string, Channel *>	chansCopy(_channels);
+	Channel								*chan;
 
-	for (std::map<string, Channel *>::iterator it(chansCopy.begin());
+	for (std::map<std::string, Channel *>::iterator it(chansCopy.begin());
 		it != chansCopy.end(); ++it)
 	{
 		chan = it->second;
@@ -51,8 +51,8 @@ void	IRC::removeFromAllChannel(User *user)
 
 void	IRC::sendWelcomeMessage(User *user, std::vector<t_clientCmd> &responseQueue)
 {
-	string	resp(
-		  getResponseFromCode(user, RPL_WELCOME, (string[]){ user->_prefix })
+	std::string	resp(
+		  getResponseFromCode(user, RPL_WELCOME, (std::string[]){ user->_prefix })
 		+ getResponseFromCode(user, RPL_YOURHOST, NULL)
 		+ getResponseFromCode(user, RPL_CREATED, NULL)
 		+ getResponseFromCode(user, RPL_MYINFO, NULL)

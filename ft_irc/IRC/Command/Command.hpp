@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:53:31 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/11 18:08:14 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:30:29 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ class	Command
 {
 	private:
 		User				*_user;
-		string				_type;
-		std::vector<string>	_params;
+		std::string			_type;
+		std::vector<std::string>	_params;
 
-		void				buildParams(string const &strParams);
-		void				deduceType(string &cmd);
-		void				treatTOPIC(string const &rawCmd);
-		void				treatMODE();
-		void				treatPRIVMSG_NOTICE();
+		void				buildParams(std::string const &strParams);
+		void				deduceType(std::string &cmd);
+		void				treatTOPIC(std::string const &rawCmd);
+		void				treatMODE(void);
+		void				treatPRIVMSG_NOTICE(void);
 		
 	public:
 		// Functions implemented here were added just to respect the canonical convention
@@ -36,7 +36,7 @@ class	Command
 			return ;
 		};
 		
-		Command(User *user, string const &cmd);
+		Command(User *user, std::string const &cmd);
 		virtual ~Command(void);
 		Command &operator=(Command const &rhs)
 		{

@@ -6,13 +6,13 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:22:08 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 20:55:40 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:49:28 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../IRC.hpp"
 
-Channel	*IRC::newChannel(string const &name, User *creator)
+Channel	*IRC::newChannel(std::string const &name, User *creator)
 {
 	Channel	*chan(new Channel(name, creator));
 
@@ -21,7 +21,7 @@ Channel	*IRC::newChannel(string const &name, User *creator)
 	return chan;
 }
 
-Channel	*IRC::getChannelByName(string const &name) const
+Channel	*IRC::getChannelByName(std::string const &name) const
 {
 	if (_channels.find(name) != _channels.end())
 		return _channels.at(name);

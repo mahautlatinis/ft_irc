@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ADMIN.cpp                                          :+:      :+:    :+:   */
+/*   admin.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:26:38 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 18:26:39 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:30:55 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 class	AdminInfo
 {
 	public: 
-		string	name;
-		string	location;
-		string	email;
+		std::string	name;
+		std::string	location;
+		std::string	email;
 
 		AdminInfo(): name(ADMIN_NAME), location(ADMIN_LOC), email(ADMIN_EMAIL)
 		{
@@ -37,17 +37,17 @@ void	IRC::admin(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {
 	User	*user(cmd._user);
 
-	string	resp(
+	std::string	resp(
 		  getResponseFromCode(user, RPL_ADMINME, NULL)
-		+ getResponseFromCode(user, RPL_ADMINLOC1, (string[])
+		+ getResponseFromCode(user, RPL_ADMINLOC1, (std::string[])
 			{
 				administrator.name
 			})
-		+ getResponseFromCode(user, RPL_ADMINLOC2, (string[])
+		+ getResponseFromCode(user, RPL_ADMINLOC2, (std::string[])
 			{
 				administrator.location 
 			})
-		+ getResponseFromCode(user, RPL_ADMINEMAIL, (string[])
+		+ getResponseFromCode(user, RPL_ADMINEMAIL, (std::string[])
 			{ 
 				administrator.email 
 			})

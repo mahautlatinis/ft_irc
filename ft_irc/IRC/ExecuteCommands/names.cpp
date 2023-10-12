@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:50:42 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/06 23:05:55 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 09:39:58 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	IRC::names(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {
-	std::vector<string>			chanNames;
-	string						name;
-	string						resp;
-	string						names;
 	std::set<User *>::iterator	it;
+	std::string					name;
+	std::string					names;
+	std::string					resp;
+	std::vector<std::string>	chanNames;
 	
 	if (cmd._params.empty())
 		name = "*";
@@ -50,11 +50,11 @@ void	IRC::names(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 			resp = getResponseFromCode(
 				user,
 				RPL_NAMREPLY,
-				(string[]){ "= " + name, names }
+				(std::string[]){ "= " + name, names }
 			);
 		}
 	}
-	resp += getResponseFromCode(user, RPL_ENDOFNAMES, (string[]){ name });
+	resp += getResponseFromCode(user, RPL_ENDOFNAMES, (std::string[]){ name });
 	pushToQueue(user->_fd, resp, responseQueue);
 	return ;
 }
