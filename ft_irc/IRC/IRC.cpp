@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:56:21 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 11:04:13 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 12:17:08 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	IRC::processClientCommand(t_clientCmd const &command,
 	User						*user;
 	int							fd(command.first);
 	std::vector<std::string>	subCmds;
-	std::string					msg;
+	std::string					msg = "";
 
 	if (_users.find(fd) == _users.end())
 	{
@@ -53,11 +53,12 @@ bool	IRC::processClientCommand(t_clientCmd const &command,
 		if (_svPassword.empty())
 			user->_passwordOK = true;
 
-		msg = getNoticeMsg(
-			_prefix, user,
-			std::string("*** Your hostname is set to ") + USR_HOST
-				+ " like everybody else."
-		);
+		if (!__APPLE__)
+			msg = getNoticeMsg(
+				_prefix, user,
+				std::string("*** Your hostname is set to ") + USR_HOST
+					+ " like everybody else."
+			);
 		pushToQueue(fd, getNoticeMsg(_prefix, user, msg), responseQueue);
 	}
 	else

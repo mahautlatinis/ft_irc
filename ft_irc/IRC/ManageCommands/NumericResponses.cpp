@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:21:34 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:01:09 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 12:20:30 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,8 @@ std::string	IRC::getResponseFromCode(User *user, int code,
 		case ERR_NOTEXTTOSEND:
 			ss  << comma << "No text to send"; break;
 		case ERR_UNKNOWNCOMMAND:
-			ss  << params[0] << " " << comma << "Unknown command"; break;
+			if (!__APPLE__)
+				ss  << params[0] << " " << comma << "Unknown command"; break;
 		case ERR_NOMOTD:
 			ss  << comma << "MOTD File is missing"; break;
 		case ERR_NONICKNAMEGIVEN:

@@ -6,7 +6,7 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:09:16 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:40:14 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/12 12:15:21 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ User::User(int fd):
 	_bot(false),
 	_invisible(false),
 	_oper(false),
-	_passwordOK(true),
-	_registered(true),
+	_passwordOK(false),
+	_registered(false),
 	_fd(fd),
 	_awayMsg(""),
 	_nick(DEFAULT_NAME),
