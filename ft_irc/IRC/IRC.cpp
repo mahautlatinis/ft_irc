@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:56:21 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 12:17:08 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:36:15 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "IRC.hpp"
+#include <IRC.hpp>
 
 IRC::IRC(std::string const &password):
 	_startupTime(::time(NULL)),

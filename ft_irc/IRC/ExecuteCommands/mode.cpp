@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:39:52 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:58:13 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:34:22 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../IRC.hpp"
+#include <IRC.hpp>
 
 void	IRC::userMode
 	(User *user, 

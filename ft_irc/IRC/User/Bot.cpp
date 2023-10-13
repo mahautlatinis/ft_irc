@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:06:36 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:40:18 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:32:16 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bot.hpp"
+#include <Bot.hpp>
 
 #define	PYTHON_PORT	33333
 #define	BUFFER_SIZE	512

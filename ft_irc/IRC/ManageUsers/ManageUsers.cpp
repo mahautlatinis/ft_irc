@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:50:09 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 11:00:40 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:32:50 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../IRC.hpp"
+#include <IRC.hpp>
 
 User	*IRC::getUserByNick(std::string const &nick) const
 {

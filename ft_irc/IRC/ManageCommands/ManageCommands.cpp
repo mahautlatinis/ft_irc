@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:19:48 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 12:45:15 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:33:03 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../IRC.hpp"
+#include <IRC.hpp>
 
 void	IRC::unknownCmd(Command const &cmd,
 	std::vector<t_clientCmd> &responseQueue) const

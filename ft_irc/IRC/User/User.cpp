@@ -6,12 +6,12 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:09:16 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 12:15:21 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:32:40 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "User.hpp"
-#include "../Channel/Channel.hpp"
+#include <User.hpp>
+#include <Channel.hpp>
 
 User::User(int fd):
 	_bot(false),

@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:16:03 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:59:35 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:35:53 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../IRC.hpp"
+#include <IRC.hpp>
 
 void	IRC::version(Command const &cmd,
 	std::vector<t_clientCmd> &responseQueue)

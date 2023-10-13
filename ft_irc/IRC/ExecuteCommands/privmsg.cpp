@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:03:01 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:59:22 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:35:24 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../IRC.hpp"
+#include <IRC.hpp>
 
 void	IRC::userPrivmsg
 	(User *user, 

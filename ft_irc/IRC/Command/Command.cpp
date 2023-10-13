@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:55:35 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:16:45 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:33:28 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Command.hpp"
+#include <Command.hpp>
 
 static std::set<std::string>	_cmdIgnored;
 static std::set<std::string>	_cmdAvail;

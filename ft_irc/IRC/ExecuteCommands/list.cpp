@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:57:05 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:00:49 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:34:16 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../IRC.hpp"
+#include <IRC.hpp>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

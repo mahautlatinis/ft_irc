@@ -1,46 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Client.hpp                                         :+:      :+:    :+:   */
+/*   Bot.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 19:55:49 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:51:38 by mahautlatin      ###   ########.fr       */
+/*   Created: 2023/10/06 20:08:20 by mahautlatin       #+#    #+#             */
+/*   Updated: 2023/10/13 19:38:09 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "../includes/Headers.hpp"
+#include <Headers.hpp>
+#include <User.hpp>
 
-#define BUFFER_SIZE	512
-
-class	Client
+class Bot: public User
 {
-	public:
-		virtual ~Client(void);
-		friend class Server;
-
 	private:
-		Client(void);
+		std::string	cmdCALC(std::string const &expr);
+		std::string	cmdHELP(void);
+		std::string	cmdQUOTE(void);
+		std::string	getResponseFromPython(std::string const &botRequest);
+		std::string	processUserMsg(std::string const &msg);
+
+	public:
 		// Functions implemented here were added just to respect the canonical convention
-		Client(Client const &src): _fd(src._fd)
+		Bot(void);
+		Bot(Bot const &src)
 		{
 			*this = src;
 			return ;
 		};
-
-		Client(int fd);
-		Client &operator=(Client const &rhs)
+		virtual ~Bot(void);
+		Bot &operator=(Bot const &rhs)
 		{
 			(void)rhs;
 			return *this;
 		}
 
-		char		_buffer[BUFFER_SIZE + 1];
-		int const	_fd;
-		std::string	_cmdBuilder;
-		bool		receiveCommand(std::string &cmd);
-		void		sendResponse(std::string const &resp);
+		std::string	getWelcomeMsg(std::string const &nick);
+
+		friend class IRC;
 };

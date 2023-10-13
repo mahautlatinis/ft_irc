@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:22:08 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:49:28 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:33:09 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../IRC.hpp"
+#include <IRC.hpp>
 
 Channel	*IRC::newChannel(std::string const &name, User *creator)
 {
