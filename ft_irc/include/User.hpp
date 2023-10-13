@@ -6,13 +6,13 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:11:25 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 11:04:15 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:37:50 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "../../includes/Headers.hpp"
+#include <Headers.hpp>
 
 #define USR_VALID_MODES	"aioB"
 #define USR_ALL_MODES	"aiorwsOB"

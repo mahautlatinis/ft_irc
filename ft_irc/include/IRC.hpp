@@ -6,17 +6,17 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:09:48 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 11:02:59 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:37:34 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "../includes/Headers.hpp"
-#include "User/User.hpp"
-#include "User/Bot.hpp"
-#include "Channel/Channel.hpp"
-#include "Command/Command.hpp"
+#include <Headers.hpp>
+#include <User.hpp>
+#include <Bot.hpp>
+#include <Channel.hpp>
+#include <Command.hpp>
 
 class	IRC
 {

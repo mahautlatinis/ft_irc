@@ -6,14 +6,14 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:53:19 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:55:00 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:38:27 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once 
 
-#include "../../includes/Headers.hpp"
-#include "../User/User.hpp"
+#include <Headers.hpp>
+#include <User.hpp>
 
 
 #define CHAN_ALL_MODES		"biklmnopstv"

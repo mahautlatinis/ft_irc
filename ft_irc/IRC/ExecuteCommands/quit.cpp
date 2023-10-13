@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:06:14 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:46:24 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:35:29 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../IRC.hpp"
+#include <IRC.hpp>
 
 void	IRC::quit(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {

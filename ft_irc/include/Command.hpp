@@ -6,13 +6,13 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:53:31 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:55:30 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:38:42 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "../../includes/Headers.hpp"
+#include <Headers.hpp>
 
 class	Command
 {

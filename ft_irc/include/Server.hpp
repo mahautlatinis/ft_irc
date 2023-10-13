@@ -6,15 +6,15 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:02:45 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 11:04:08 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:38:59 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "../includes/Headers.hpp"
-#include "../IRC/IRC.hpp"
-#include "Client.hpp"
+#include <Headers.hpp>
+#include <IRC.hpp>
+#include <Client.hpp>
 
 #define MAX_LISTEN	42
 #define SERVER_ERR(err)	do { std::cerr << RED << err << ": " << NC << strerror(errno) << std::endl; exit(1); } while (0)

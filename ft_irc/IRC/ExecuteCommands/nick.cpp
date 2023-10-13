@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:54:48 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:40:23 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:34:42 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../IRC.hpp"
+#include <IRC.hpp>
 
 void	IRC::nick(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {

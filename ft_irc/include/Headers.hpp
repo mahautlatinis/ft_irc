@@ -6,15 +6,15 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 20:26:57 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:08:00 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:30:02 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "Colors.hpp"
-#include "Commons.hpp"
-#include "ReplyCodes.hpp"
+#include <Colors.hpp>
+#include <Commons.hpp>
+#include <ReplyCodes.hpp>
 
 #include <algorithm>
 #include <arpa/inet.h>

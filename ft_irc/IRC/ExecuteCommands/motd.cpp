@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:54:56 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:39:28 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:34:28 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../IRC.hpp"
+#include <IRC.hpp>
 #include <fstream>
 
 static std::vector<std::string>	MOTDLines;

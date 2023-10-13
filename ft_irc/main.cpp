@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 19:24:27 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:49:04 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:39:46 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "network/Server.hpp"
+#include <Server.hpp>
 
 IRC		*gIRC = NULL;
 Server	*gServer = NULL;
@@ -68,10 +68,7 @@ int	main(int ac, char **av)
 	std::string	password;
 	if (!checkArgs(ac, av, port, password))
 		exit(0);
-
-	// IRC	*
 	gIRC = new IRC(password);
-	//Server	*
 	gServer = new Server(port, password, *gIRC);
 	gServer->setUp();
 	gServer->run();

@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:27:11 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:31:12 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:33:48 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../IRC.hpp"
+#include <IRC.hpp>
 
 void	IRC::die(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {

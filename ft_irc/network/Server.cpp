@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:58:30 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:28:11 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:36:38 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Server.hpp"
+#include <Server.hpp>
 
 Server::Server(int port, std::string const &password, IRC &irc) :
 	_fd(-1),

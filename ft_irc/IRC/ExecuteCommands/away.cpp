@@ -6,11 +6,11 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:26:34 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 09:31:06 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:33:41 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../IRC.hpp"
+#include <IRC.hpp>
 
 void	IRC::away(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 {

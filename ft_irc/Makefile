@@ -1,4 +1,4 @@
-INC_DIR		= .
+INC_DIR		= ./include
 
 SRCS		=	./main.cpp \
 				./IRC/ManageUsers/ManageUsers.cpp \

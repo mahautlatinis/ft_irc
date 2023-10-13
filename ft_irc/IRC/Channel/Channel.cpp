@@ -6,12 +6,12 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 17:18:14 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:54:11 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:33:21 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Channel.hpp"
-#include "../IRC.hpp"
+#include <Channel.hpp>
+#include <IRC.hpp>
 
 Channel::Channel(std::string const &name, User *creator):
 	_anyoneCanSetTopic(false),

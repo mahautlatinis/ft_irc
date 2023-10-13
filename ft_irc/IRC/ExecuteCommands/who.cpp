@@ -6,12 +6,12 @@
 /*   By: mahautlatinis <mahautlatinis@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:14:57 by mahautlatin       #+#    #+#             */
-/*   Updated: 2023/10/12 10:59:46 by mahautlatin      ###   ########.fr       */
+/*   Updated: 2023/10/13 19:35:59 by mahautlatin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../IRC.hpp"
-#include "includes/Commons.hpp"
+#include <IRC.hpp>
+#include <Commons.hpp>
 
 void	IRC::chanWho(User *user, std::string const &mask, bool o,
 	std::vector<t_clientCmd> &responseQueue) const
