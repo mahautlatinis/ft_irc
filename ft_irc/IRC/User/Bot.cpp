@@ -28,8 +28,8 @@ Bot::~Bot(void)
 
 std::string	Bot::cmdHELP(void)
 {
-	return std::string("CALC(expr): to calculate a simple math expression (only digits and +-*/^ operators). ")
-			+ "QUOTE: to get a random quote from the Internet.";
+	return std::string("CALC(expr) to calculate a simple math expression (only digits and +-*/^ operators). ")
+			+ "QUOTE to get a random quote from the Internet.";
 }
 
 std::string	Bot::cmdCALC(std::string const &expr)
@@ -42,7 +42,7 @@ std::string	Bot::cmdCALC(std::string const &expr)
 
 	for (std::string::const_iterator it(expr.begin()); it != expr.end(); ++it)
 		if (validCharSet.find(*it) == validCharSet.end())
-			return "ERROR: expression contains illegal characters";
+			return "ERROR expression contains illegal characters";
 	return getResponseFromPython("CALC " + expr);
 }
 
@@ -118,14 +118,14 @@ std::string	Bot::processUserMsg(std::string const &msg)
 	else if (cmdType == "QUOTE")
 		return cmdQUOTE();
 	else
-		return "Sorry man, I don't really know what you want";
+		return "Sorry...";
 }
 
 std::string	Bot::getWelcomeMsg(const std::string &nick)
 {
 	return	std::string(
 		"Hello " + nick
-		+ ", I'm your personnal assistant. "
+		+ ", I am your personnal assistant. "
 		+ "Type HELP to see what I can do for you."
 	);
 }

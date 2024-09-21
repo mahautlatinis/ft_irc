@@ -30,11 +30,9 @@ python3 proxy.py
 To test a new client connection from the terminal (optional)
 
 ```sh
-nc -C 127.0.0.1 3333
-CAP LS 302
-PASS pass
-NICK nickname
-USER nickname username 127.0.0.1 :realname
+# A new socket will be listening
+# Use a client software to connect to the server with the full commands CAP LS, NICK, USER, PASS.
+nc -C 127.0.0.1 3333 # Use the port number of the server if there is no proxy
 ```
 
 ## Commands to test
@@ -59,11 +57,13 @@ USER nickname username 127.0.0.1 :realname
 
 - `JOIN #channel`
 
-### Join multiples channels
+⚠️ Make sure you implement the possibility to join multiple channels at once (which is not the case in the current project)
+Example:
 
 - `JOIN #channel1,#channel2,#channel3`
 
 Channel names with & are supported but we did not implement the full features.
+We prefixed with a `#` channel names that are missing it, but you'd rather not do it (not supported on every client).
 
 #### Kick a user from a channel (part by force from a channel)
 
