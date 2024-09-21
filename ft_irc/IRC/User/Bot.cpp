@@ -28,8 +28,8 @@ Bot::~Bot(void)
 
 std::string	Bot::cmdHELP(void)
 {
-	return std::string("'00,01CALC01,00 (expr)01' Calculate a simple math expression (only digits and +-*/^ operators). ")
-			+ "'00,01QUOTE01' Get a random quote from the Internet.";
+	return std::string("CALC(expr) to calculate a simple math expression (only digits and +-*/^ operators). ")
+			+ "QUOTE to get a random quote from the Internet.";
 }
 
 std::string	Bot::cmdCALC(std::string const &expr)
@@ -42,7 +42,7 @@ std::string	Bot::cmdCALC(std::string const &expr)
 
 	for (std::string::const_iterator it(expr.begin()); it != expr.end(); ++it)
 		if (validCharSet.find(*it) == validCharSet.end())
-			return "04ERROR Expression contains illegal characters";
+			return "ERROR expression contains illegal characters";
 	return getResponseFromPython("CALC " + expr);
 }
 
@@ -53,7 +53,7 @@ std::string	Bot::cmdQUOTE(void)
 
 std::string	Bot::getResponseFromPython(std::string const &botRequest)
 {
-	std::string const	errorMsg("04ERROR ");
+	std::string const	errorMsg("ERROR ");
 
 	int	sv(socket(AF_INET, SOCK_STREAM, 0));
 	if (sv < 0)
@@ -92,8 +92,6 @@ std::string	Bot::getResponseFromPython(std::string const &botRequest)
 			&& resp.find(CMD_DELIM, resp.size() - LEN_DELIM) != std::string::npos)
 			break;
 	}
-	if (resp.find("ERROR ") == 0)
-		resp = "04" + resp;
 	close(sv);
 	return resp;
 }
@@ -120,15 +118,15 @@ std::string	Bot::processUserMsg(std::string const &msg)
 	else if (cmdType == "QUOTE")
 		return cmdQUOTE();
 	else
-		return "Sorry man, I don't really know what you want";
+		return "Sorry I do not understand...";
 }
 
 std::string	Bot::getWelcomeMsg(const std::string &nick)
 {
 	return	std::string(
 		"Hello " + nick
-		+ ", I'm your personnal assistant. "
-		+ "Type '00,01HELP01' to see what I can do for you."
+		+ ", I am your personnal assistant. "
+		+ "Type HELP to see what I can do for you."
 	);
 }
 

@@ -35,7 +35,7 @@ bool	Channel::isPrefix(char c)
 
 bool	Channel::isNameLegal(std::string const &name)
 {
-	if (!isPrefix(name[0]))
+	if (!isPrefix(name[0]) || name.size() < 2)
 		return false;
 
 	static std::string const	illegalChars(CHAN_ILLEGAL_CHARS);
