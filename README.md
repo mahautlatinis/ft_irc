@@ -4,7 +4,7 @@ Checkout the rfc here: https://www.rfc-editor.org/rfc/rfc2812#section-1.3
 
 IRC Client I recommend on a mac : `LimeChat`.
 
-Use `Wireshark` to see the packets sent by a client. (filter `6667/TCP`)
+Use `Wireshark` to see the packets sent by a client (filter `port 6667` and choose loopback to debug locally)
 
 ## Connection registration
 
