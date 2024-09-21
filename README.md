@@ -38,10 +38,7 @@ PASS PASSWORD
 NICK nickname
 USER username 0 * :realname
 ```
-
-# Use the port number of the server if there is no proxy
-
-# Avoid crashing when a signal is killing a client connection.
+⚠️ Avoid crashing when a signal is killing a client connection.
 
 ```
 
