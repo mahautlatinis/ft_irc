@@ -13,14 +13,159 @@ To run the server:
 ./ircserv 6667 PASS
 ```
 
+To run the server another port so the proxy can run on 6667:
+
 ```sh
-# test new client connection (using proxy)
+./ircserv 6668 PASS
+```
+
+To run the proxy:
+
+```sh
+python3 proxy.py
+```
+
+To test a new client connection (using proxy)
+
+```sh
 nc -C 127.0.0.1 3333
 CAP LS 302
 PASS pass
 NICK nickname
 USER nickname username 127.0.0.1 :realname
 ```
+
+Checkout the rfc here: https://www.rfc-editor.org/rfc/rfc2812#section-1.3
+
+## Commands to test
+
+#### Find information about the administrator of the server
+
+- `ADMIN`
+
+#### Set away status (automatic reply)
+
+- `AWAY :reason`
+
+#### Shutdown the server (operator permissions)
+
+- `DIE`
+
+#### Invite another user to a channel
+
+- `INVITE nickname #channel`
+
+#### Joining / Creating channels with # (with a key) and &
+
+- `JOIN #channel`
+- `JOIN #channel key`
+- `JOIN &channel`
+
+#### Kick a user from a channel (part by force from a channel)
+
+- `KICK #channel nickname`
+- `KICK #channel nickname :reason`
+
+#### Kill a client (operator permissions) - disconnected from the server
+
+- `KILL nickname :reason`
+
+#### List channels and their topics
+
+- `LIST`
+
+#### List specific channels
+
+- `LIST #channel`
+
+#### Change mode of a user
+
+- `MODE nickname +o` (to give operator status)
+- `MODE nickname -o` (to remove operator status)
+- `MODE nickname +i` (to give invisible status)
+- `MODE nickname -i` (to remove invisible status)
+- `MODE nickname +a` (to give away status)
+
+#### Get message of the day
+
+- `MOTD`
+
+#### Listing all users
+
+- `NAMES`
+
+#### Listing all users in a channel
+
+- `NAMES #channel`
+
+#### Define nickname at registration or edit it
+
+- `NICK nickname`
+
+#### Sed a notice message (no automatic answers)
+
+- `NOTICE nickname :Hello`
+
+#### Become an operator
+
+- `OPER username password`
+
+#### Part a message from a channel
+
+- `PART #channel`
+- `PART #channel :this is a very nice message`
+
+#### Define the password at connection registration
+
+- `PASS password`
+
+#### Send a PING to the server
+
+- `PING ft_irc`
+
+#### Sending private message to a user
+
+- `PRIVMSG nickname :Hello`
+
+#### Sending private message to a channel
+
+- `PRIVMSG #channel :Hello`
+
+#### Sending private message to a channel with a key
+
+- `PRIVMSG #channel key :Hello`
+
+#### Quit (stop client session) - Error message is sent by the server to the client
+
+- `QUIT`
+
+#### Query local time
+
+- `TIME`
+
+#### Change topic of a channel
+
+- `TOPIC #channel :newtopic`
+
+#### Change topic of a channel with a key
+
+- `TOPIC #channel key :newtopic`
+
+#### Define the username, realname and hostname at connection
+
+- `USER username localhost ft_irc :realname`
+
+#### Query the version of the server's implementation
+
+- `VERSION "ft_irc"`
+
+#### List all users (WHO) using wildcards
+
+- `WHO user*`
+
+#### List all users (WHO) using wildcards and operator
+
+- `WHO user* o`
 
 <img width="1434" alt="accesing our irc server" src="https://github.com/malatinipro/ft_irc/assets/77189438/575bdaf9-8390-4800-9d51-ded87f2aaf10">
 <img width="1440" alt="server sees new connection" src="https://github.com/malatinipro/ft_irc/assets/77189438/2c491a83-67b8-403c-ab86-8bbf420fbc42">
