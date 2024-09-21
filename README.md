@@ -2,6 +2,8 @@
 
 Checkout the rfc here: https://www.rfc-editor.org/rfc/rfc2812#section-1.3
 
+[Watch](https://youtu.be/Qkiu0clasuQ)
+
 IRC Client I recommend on a mac : `LimeChat`.
 
 Use `Wireshark` to see the packets sent by a client (filter `port 6667` and choose loopback to debug locally)
@@ -21,12 +23,6 @@ To run the server another port so the proxy can run on 6667:
 ./ircserv 6668 PASSWORD
 ```
 
-To run the proxy (optional):
-
-```sh
-python3 proxy.py
-```
-
 To test a new client connection from the terminal (optional)
 
 ```sh
@@ -38,6 +34,7 @@ PASS PASSWORD
 NICK nickname
 USER username 0 * :realname
 ```
+
 ⚠️ Avoid crashing when a signal is killing a client connection.
 
 ### Commands to test
@@ -73,7 +70,7 @@ We prefixed with a `#` channel names that are missing it, but you'd rather not d
 
 ⚠️ Make sure channels protected with keys are well implemented, topics should not be defined if key is not mentionned or incorrect.
 
-- `TOPIC #channel key :newtopic`
+- `TOPIC #channel :newtopic`
 
 #### Kick a user from a channel (part by force from a channel)
 
@@ -84,7 +81,8 @@ We prefixed with a `#` channel names that are missing it, but you'd rather not d
 
 #### Kill a client (operator permissions) - disconnected from the server
 
-- `KILL nickname :reason`
+- `KILL nickname`
+  Make sure you handle the `KILL nickname :reason` even with spaces.
 
 #### List channels and their topics
 
@@ -101,14 +99,16 @@ The user mentionned must be the same as the one connected to the server.
 - `MODE nickname +i` (to give invisible status)
 - `MODE nickname -i` (to remove invisible status)
 
+You can see if this is working fine by doing a LIST comman after and see the different before and after.
+
 #### Change mode of a channel
+
+⚠️ Make sure you implement more options than we did (even though you are not supposed to do all of it).
+Ours were partially done.
 
 - `MODE #channel +t` (to give topic protection)
 - `MODE #channel -t` (to remove topic protection)
 - `MODE #channel +k password` (to give a key to the channel)
-
-Make sure you implement more options than we did (even though you are not supposed to do all of it).
-⚠️ Make sure you implement properly the operator options.
 
 #### Get message of the day
 
@@ -129,6 +129,8 @@ Checkout on the terminal what the server sends back, cause you might probably se
 
 - `NICK nickname`
 
+⚠️ Make sure you handle properly multiple changes with nickname. It might become a bit tricky.
+
 #### Sed a notice message (no automatic answers)
 
 - `NOTICE nickname :Hello`
@@ -143,7 +145,7 @@ For some reason we chose to use a static password here.
 #### Part a message from a channel
 
 - `PART #channel`
-- `PART #channel :this is a very nice message`
+- `PART #channel :I am leaving`
 
 #### Define the password at connection registration
 
@@ -152,6 +154,8 @@ For some reason we chose to use a static password here.
 #### Send a PING to the server
 
 - `PING ft_irc`
+
+It should receive a PONG back from the server.
 
 #### Sending private message to a user
 
@@ -164,6 +168,8 @@ For some reason we chose to use a static password here.
 #### Sending private message to a channel with a key
 
 - `PRIVMSG #channel key :Hello`
+
+⚠️ Make sure you handle the key protection for channels properly. Ours is not perfect.
 
 #### Quit (stop client session) - Error message is sent by the server to the client
 
@@ -193,6 +199,10 @@ For some reason we chose to use a static password here.
 
 - `WHO user* o`
 
+#### List all users
+
+- `WHO *`
+
 <img width="1434" alt="accesing our irc server" src="https://github.com/malatinipro/ft_irc/assets/77189438/575bdaf9-8390-4800-9d51-ded87f2aaf10">
 <img width="1440" alt="server sees new connection" src="https://github.com/malatinipro/ft_irc/assets/77189438/2c491a83-67b8-403c-ab86-8bbf420fbc42">
 <img width="1424" alt="away" src="https://github.com/malatinipro/ft_irc/assets/77189438/9bd63a25-4ae8-4d51-a02b-e9112e81a2a3">
@@ -208,4 +218,13 @@ For some reason we chose to use a static password here.
 
 Disclaimer: while testing it afterwards, we noticed that some segmentation faults could be encountered.
 Make sure to test it properly and to fix it if you encounter any.
+
+### Bonus
+
+To run the proxy (optional):
+
+```sh
+python3 proxy.py
 ```
+
+Our proxy and bot bonus are not working perfectly so don't mind errors from them.
