@@ -40,9 +40,7 @@ USER username 0 * :realname
 ```
 ⚠️ Avoid crashing when a signal is killing a client connection.
 
-```
-
-## Commands to test
+### Commands to test
 
 #### Find information about the administrator of the server
 
