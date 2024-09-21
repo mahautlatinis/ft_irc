@@ -186,14 +186,14 @@ class	IRC
 		// Functions implemented here were added just to respect the canonical convention
 		IRC(void):
 			_startupTime(::time(NULL)),
-			_svPassword("password"),
+			_svPassword("PASSWORD"),
 			_prefix(std::string(":") + IRC_HOST),
 			_killing(-1)
 		{
 			return ;
 		};
 
-		IRC(std::string const &password);
+		IRC(std::string const &password = "PASSWORD");
 
 		IRC(IRC const &src): _startupTime(::time(NULL))
 		{

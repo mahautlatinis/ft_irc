@@ -11,7 +11,7 @@ Use `Wireshark` to see the packets sent by a client. (filter `6667/TCP`)
 To run the server:
 
 ```sh
-./ircserv 6667
+# define the password you want but make sure to add this argument
 ./ircserv 6667 PASSWORD
 ```
 

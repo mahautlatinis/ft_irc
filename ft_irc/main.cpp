@@ -26,7 +26,7 @@ static void	cleanup()
 static void	handleSignal(int signum)
 {
 	if (signum == SIGINT || signum == SIGQUIT)
-		std::cout << GREEN << "\b\bServer stopped. Good bye!" << std::endl << NC;
+		std::cout << GREEN << "\b\b" << "Server stopped. Good bye!" << std::endl << NC;
 	exit(0);
 }
 
