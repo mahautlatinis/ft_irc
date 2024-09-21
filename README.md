@@ -30,9 +30,19 @@ python3 proxy.py
 To test a new client connection from the terminal (optional)
 
 ```sh
-# A new socket will be listening
-# Use a client software to connect to the server with the full commands CAP LS, NICK, USER, PASS.
-nc -C 127.0.0.1 3333 # Use the port number of the server if there is no proxy
+brew install telnet
+
+# then
+telnet 127.0.0.1 6667
+PASS PASSWORD
+NICK nickname
+USER username 0 * :realname
+```
+
+# Use the port number of the server if there is no proxy
+
+# Avoid crashing when a signal is killing a client connection.
+
 ```
 
 ## Commands to test
@@ -44,6 +54,7 @@ nc -C 127.0.0.1 3333 # Use the port number of the server if there is no proxy
 #### Set away status (automatic reply)
 
 - `AWAY :reason`
+- `AWAY` to remove away status
 
 #### Shutdown the server (operator permissions)
 
@@ -62,13 +73,19 @@ Example:
 
 - `JOIN #channel1,#channel2,#channel3`
 
-Channel names with & are supported but we did not implement the full features.
+⚠️ Channel names with & are supported but we did not implement the full features.
 We prefixed with a `#` channel names that are missing it, but you'd rather not do it (not supported on every client).
+
+⚠️ Make sure channels protected with keys are well implemented, topics should not be defined if key is not mentionned or incorrect.
+
+- `TOPIC #channel key :newtopic`
 
 #### Kick a user from a channel (part by force from a channel)
 
 - `KICK #channel nickname`
 - `KICK #channel nickname :reason`
+
+⚠️ Avoid crashing when the user is kicking itself.
 
 #### Kill a client (operator permissions) - disconnected from the server
 
@@ -165,10 +182,6 @@ For some reason we chose to use a static password here.
 
 - `TOPIC #channel :newtopic`
 
-#### Change topic of a channel with a key
-
-- `TOPIC #channel key :newtopic`
-
 #### Define the username, realname and hostname at connection
 
 - `USER username localhost ft_irc :realname`
@@ -197,3 +210,7 @@ For some reason we chose to use a static password here.
 ![Alt text](/irc.png?raw=true 'ft_irc')
 
 <img width="1397" alt="Capture d’écran 2023-10-03 à 19 55 55" src="https://github.com/malatinipro/ft_irc/assets/77189438/c94a0a30-bc1f-4831-8d93-ad31e774b02d">
+
+Disclaimer: while testing it afterwards, we noticed that some segmentation faults could be encountered.
+Make sure to test it properly and to fix it if you encounter any.
+```
