@@ -84,11 +84,19 @@ We prefixed with a `#` channel names that are missing it, but you'd rather not d
 
 #### Change mode of a user
 
-- `MODE nickname +o` (to give operator status)
-- `MODE nickname -o` (to remove operator status)
+The user mentionned must be the same as the one connected to the server.
+
 - `MODE nickname +i` (to give invisible status)
 - `MODE nickname -i` (to remove invisible status)
-- `MODE nickname +a` (to give away status)
+
+#### Change mode of a channel
+
+- `MODE #channel +t` (to give topic protection)
+- `MODE #channel -t` (to remove topic protection)
+- `MODE #channel +k password` (to give a key to the channel)
+
+Make sure you implement more options than we did (even though you are not supposed to do all of it).
+⚠️ Make sure you implement properly the operator options.
 
 #### Get message of the day
 
@@ -116,6 +124,9 @@ Checkout on the terminal what the server sends back, cause you might probably se
 #### Become an operator
 
 - `OPER username password`
+
+⚠️ Make sure the expected password corresponds to the server's password (dynamic).
+For some reason we chose to use a static password here.
 
 #### Part a message from a channel
 

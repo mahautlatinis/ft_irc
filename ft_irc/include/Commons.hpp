@@ -22,8 +22,9 @@
 #define IRC_VER		            "ft_irc v1.0"
 #define LEN_DELIM	            2
 #define MOTD_FILE	            "motd"
-#define OPER_PASSWORD	        "ftirc"
+#define OPER_PASSWORD	        "PASSWORD"
 #define OPER_USERNAME	        "admin"
+#define OPER_MALATINI	        "malatini"
 #define USR_HOST	            "user.ft-irc.42.fr"
 
 #include <string>
