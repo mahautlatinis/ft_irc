@@ -1,31 +1,33 @@
 # ft_irc 📚
 
-Rewriting an IRC server in C++ in team (@qdam and @bahaas)
+Checkout the rfc here: https://www.rfc-editor.org/rfc/rfc2812#section-1.3
 
-- Status: validated (13/01/2022)
+IRC Client I recommend on a mac : `LimeChat`.
 
-IRC Client I recommend on a mac : `LimeChat`
 Use `Wireshark` to see the packets sent by a client. (filter `6667/TCP`)
+
+## Connection registration
 
 To run the server:
 
 ```sh
-./ircserv 6667 PASS
+./ircserv 6667
+./ircserv 6667 PASSWORD
 ```
 
 To run the server another port so the proxy can run on 6667:
 
 ```sh
-./ircserv 6668 PASS
+./ircserv 6668 PASSWORD
 ```
 
-To run the proxy:
+To run the proxy (optional):
 
 ```sh
 python3 proxy.py
 ```
 
-To test a new client connection (using proxy)
+To test a new client connection from the terminal (optional)
 
 ```sh
 nc -C 127.0.0.1 3333
@@ -34,8 +36,6 @@ PASS pass
 NICK nickname
 USER nickname username 127.0.0.1 :realname
 ```
-
-Checkout the rfc here: https://www.rfc-editor.org/rfc/rfc2812#section-1.3
 
 ## Commands to test
 
@@ -55,11 +55,11 @@ Checkout the rfc here: https://www.rfc-editor.org/rfc/rfc2812#section-1.3
 
 - `INVITE nickname #channel`
 
-#### Joining / Creating channels with # (with a key) and &
+#### Joining / Creating channels
 
 - `JOIN #channel`
-- `JOIN #channel key`
-- `JOIN &channel`
+
+Channel names with & are not supported properly here.
 
 #### Kick a user from a channel (part by force from a channel)
 
