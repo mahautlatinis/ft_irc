@@ -59,7 +59,11 @@ USER nickname username 127.0.0.1 :realname
 
 - `JOIN #channel`
 
-Channel names with & are not supported properly here.
+### Join multiples channels
+
+- `JOIN #channel1,#channel2,#channel3`
+
+Channel names with & are supported but we did not implement the full features.
 
 #### Kick a user from a channel (part by force from a channel)
 

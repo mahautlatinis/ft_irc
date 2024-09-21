@@ -26,7 +26,15 @@ void	IRC::join(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 		return ;
 	}
 
+	for (std::vector<std::string>::const_iterator it = cmd._params.begin(); it != cmd._params.end(); ++it) {
+        std::cout << *it << " "; // Affiche chaque élément avec un espace entre eux
+    }
+
 	::strSplit(chanNames, cmd._params[0], ",");
+
+	for (std::vector<std::string>::const_iterator it = cmd._params.begin(); it != cmd._params.end(); ++it) {
+        std::cout << *it << " "; // Affiche chaque élément avec un espace entre eux
+    }
 
 	if (cmd._params.size() > 1)
 		::strSplit(chanKeys, cmd._params[1], ",");
@@ -37,6 +45,8 @@ void	IRC::join(Command const &cmd, std::vector<t_clientCmd> &responseQueue)
 		std::string const	&key = (i < chanKeys.size())
 							 ? chanKeys[i]
 							 : "";
+
+		std::cout << "name is " << name << " and key is " << key << std::endl;
 
 		if (!Channel::isNameLegal(name))
 		{

@@ -18,7 +18,7 @@
 
 #define CHAN_ALL_MODES		"biklmnopstv"
 #define CHAN_ILLEGAL_CHARS	"\a,: "
-#define CHAN_PREFIX			"#"
+#define CHAN_PREFIX			"#&"
 #define CHAN_VALID_MODES	"ikot"
 
 class	Channel
