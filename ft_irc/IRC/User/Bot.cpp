@@ -118,7 +118,7 @@ std::string	Bot::processUserMsg(std::string const &msg)
 	else if (cmdType == "QUOTE")
 		return cmdQUOTE();
 	else
-		return "Sorry...";
+		return "Sorry I do not understand...";
 }
 
 std::string	Bot::getWelcomeMsg(const std::string &nick)

@@ -94,7 +94,10 @@ We prefixed with a `#` channel names that are missing it, but you'd rather not d
 
 - `MOTD`
 
-#### Listing all users
+#### Listing users present in a channel
+
+Make sure multiple users are present in the channel.
+Checkout on the terminal what the server sends back, cause you might probably see nothing on the client software.
 
 - `NAMES`
 
